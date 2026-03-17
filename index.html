@@ -23,15 +23,14 @@
   <div class="relative bg-linear-to-b from-[#FF6D91] to-[#FFB9CB]">
 
     <!-- Master wrapper -->
-    <div class=" max-w-432 mx-auto px-25">
+    <div class="w-full md:max-w-432 md:mx-auto px-4 md:px-25">
 
       <!-- Content grid -->
-      <div class="grid grid-cols-12 gap-5 px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
 
-        <!-- Header -->
-        <header class="col-span-12 flex justify-between items-center py-10 font-medium">
+        <!-- Header Desktop -->
+        <header class="hidden md:flex md:col-span-12 justify-between items-center py-10 font-medium">
           <img class="" src="./assets/logo.svg" />
-
           <div class="flex gap-12 items-center text-white">
             <nav>
               <ul class="flex gap-10 ">
@@ -41,10 +40,8 @@
                 <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Contact</a></li>
               </ul>
             </nav>
-
             <button
-              class="transition duration-100  hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full border-2 border-white">Login/Signup
-            </button>
+              class="transition duration-100 hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full border-2 border-white">Login/Signup</button>
             <div class="flex gap-5">
               <a href="#"><i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i></a>
               <a href="#"><i class="fa-solid fa-heart transition duration-100 hover:scale-110"></i></a>
@@ -53,66 +50,94 @@
           </div>
         </header>
 
+        <!-- Header Mobile -->
+        <header class="flex md:hidden col-span-1 justify-between items-center py-6 px-4 font-medium text-white">
+          <img class="w-24" src="./assets/logo.svg" />
+          <button id="menu-btn" class="text-3xl focus:outline-none">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </header>
+
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu"
+          class="fixed inset-0 bg-[#FF6D91] bg-opacity-95 z-50 flex flex-col items-center justify-center text-white text-xl hidden">
+          <button id="close-menu" class="absolute top-6 right-6 text-3xl">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <ul class="flex flex-col items-center gap-8 mt-10">
+            <li><a class="uppercase" href="#">Home</a></li>
+            <li><a class="uppercase" href="#">Shop</a></li>
+            <li><a class="uppercase" href="#">Blog</a></li>
+            <li><a class="uppercase" href="#">Contact</a></li>
+            <li><button class="bg-white text-[#FF6D91] rounded-full px-6 py-2 mt-4 uppercase">Login/Signup</button></li>
+          </ul>
+        </nav>
+
         <!-- Hero Section -->
-        <section class="col-span-12 flex items-center justify-between gap-5 text-white py-10 mb-20">
-          <div class="flex flex-col gap-4">
-            <h2 class="text-4xl uppercase">Sweetness from the Heart of Peru</h2>
-            <p class="w-120">
+        <section
+          class="col-span-1 md:col-span-12 flex flex-col-reverse mb-14 md:flex-row items-center md:justify-between justify-center gap-5 text-white md:py-10 md:mb-20">
+          <div class="flex flex-col gap-8 md:gap-4 w-full md:w-auto items-center md:items-start">
+            <h2 class="text-2xl px-6 md:px-0 md:text-4xl uppercase text-center md:text-left">Sweetness from the Heart of
+              Peru
+            </h2>
+            <p class="w-full px-6 md:px-0 md:w-120 text-center md:text-left">
               Handcrafted treats powered by Peruvian superfoods. Designed for diabetics, made for everyone.
             </p>
             <button
-              class="bg-white text-[#FF6D91] transition duration-100 hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full">shop
+              class="bg-white text-[#FF6D91] transition duration-100 hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full mx-auto md:mx-0">shop
               now</button>
           </div>
-          <div>
-            <img class="w-220 h-auto" src="./assets//cake1.png">
+          <div class="w-full md:w-auto flex justify-center md:block">
+            <img class="w-full px-4 md:px-0 md:w-220 h-auto" src="./assets//cake1.png">
           </div>
         </section>
+
       </div>
     </div>
+
     <div class="absolute -bottom-1 left-0 w-full h-8 flex overflow-hidden">
       <div
         class="w-full h-full bg-[radial-gradient(circle_at_50%_100%,white_60%,transparent_62%)] bg-size-[52px_34px] bg-repeat-x">
       </div>
     </div>
+
   </div>
 
   <main>
     <!-- Master wrapper -->
-    <div class=" max-w-432 mx-auto px-25">
+    <div class="w-full md:max-w-432 md:mx-auto px-4 md:px-25">
 
       <!-- Information Section -->
       <section class="py-16">
-        <div class="grid grid-cols-12 gap-5 px-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-5 md:px-10">
 
-          <div class="col-span-4 flex flex-col items-center justify-center gap-8">
-            <i class="fa-solid fa-award text-5xl text-[#C92B5D]"></i>
-            <div class="flex flex-col items-center gap-2">
+          <div class="col-span-1 md:col-span-4 flex flex-col items-center justify-center">
+            <i class="fa-solid fa-award text-4xl md:text-5xl text-[#C92B5D]"></i>
+            <div class="flex flex-col items-center gap-2 mt-5">
               <span class="font-karla font-bold text-gray-700 text-xl">Authentic Origins</span>
-              <p class="text-center text-md w-sm">We use sustainably sourced fruits directly from Peruvian Andean
-                valleys.
-              </p>
+              <p class="text-center text-[16px] md:text-md md:w-sm">We use sustainably sourced fruits directly
+                from Peruvian Andean
+                valleys.</p>
             </div>
           </div>
 
-          <div class="col-span-4 flex flex-col items-center justify-center gap-8">
-            <i class="fa-solid fa-bolt text-5xl text-[#C92B5D]"></i>
-            <div class="flex flex-col items-center gap-2">
+          <div class="col-span-1 md:col-span-4 flex flex-col items-center justify-center">
+            <i class="fa-solid fa-bolt text-4xl md:text-5xl text-[#C92B5D]"></i>
+            <div class="flex flex-col items-center gap-2 mt-5">
               <span class="font-karla font-bold text-gray-700 text-xl">Vitamin Boost</span>
-              <p class="text-center text-md w-sm">More than just a dessert; a dose of antioxidants and Vitamin C in
-                every
-                bite.
-              </p>
+              <p class="text-center text-[16px] md:text-md md:w-sm">More than just a dessert; a dose of antioxidants and
+                Vitamin C in
+                every bite.</p>
             </div>
           </div>
 
-          <div class="col-span-4 not-even:flex flex-col items-center justify-center gap-8">
-            <i class="fa-solid fa-heart-pulse text-5xl text-[#C92B5D]"></i>
-            <div class="flex flex-col items-center gap-2">
+          <div class="col-span-1 md:col-span-4 flex flex-col items-center justify-center">
+            <i class="fa-solid fa-heart-pulse text-4xl md:text-5xl text-[#C92B5D]"></i>
+            <div class="flex flex-col items-center gap-2 mt-5">
               <span class="font-karla font-bold text-gray-700 text-xl">Diabetic Friendly</span>
-              <p class="text-center text-md w-sm">No hidden sugars, no artificial flavors. Just 100% natural Peruvian
-                goodness.
-              </p>
+              <p class="text-center text-[16px] md:text-md md:w-sm">No hidden sugars, no artificial flavors. Just 100%
+                natural Peruvian
+                goodness.</p>
             </div>
           </div>
 
@@ -121,35 +146,30 @@
 
       <!-- Highlight Section -->
       <section class="py-16">
-        <div class="grid grid-cols-12 gap-5 px-10">
-
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 px-4 md:px-10">
         </div>
       </section>
 
       <!-- Products Section -->
       <section class="py-16">
-        <div class="grid grid-cols-12 gap-5 px-10">
-
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 px-4 md:px-10">
         </div>
       </section>
 
       <!-- Blog Section -->
       <section class="py-16">
-        <div class="grid grid-cols-12 gap-5 px-10">
-
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 px-4 md:px-10">
         </div>
       </section>
 
       <!-- Suscription Section -->
       <section class="py-16">
-        <div class="grid grid-cols-12 gap-5 px-10">
-
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 px-4 md:px-10">
         </div>
       </section>
 
     </div>
   </main>
-
 
 </body>
 
