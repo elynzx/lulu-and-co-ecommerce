@@ -265,6 +265,9 @@
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
+  .mt-14 {
+    margin-top: calc(var(--spacing) * 14);
+  }
   .mb-1 {
     margin-bottom: calc(var(--spacing) * 1);
   }
@@ -385,6 +388,9 @@
   .w-120 {
     width: calc(var(--spacing) * 120);
   }
+  .w-180 {
+    width: calc(var(--spacing) * 180);
+  }
   .w-220 {
     width: calc(var(--spacing) * 220);
   }
@@ -478,8 +484,14 @@
   .gap-6 {
     gap: calc(var(--spacing) * 6);
   }
+  .gap-7 {
+    gap: calc(var(--spacing) * 7);
+  }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+  .gap-9 {
+    gap: calc(var(--spacing) * 9);
   }
   .gap-10 {
     gap: calc(var(--spacing) * 10);
@@ -807,6 +819,12 @@
   .text-\[\#FF6D91\] {
     color: #FF6D91;
   }
+  .text-\[\#c92b75\] {
+    color: #c92b75;
+  }
+  .text-\[\#d32073\] {
+    color: #d32073;
+  }
   .text-gray-700 {
     color: var(--color-gray-700);
   }
@@ -888,6 +906,11 @@
       grid-column: span 12 / span 12;
     }
   }
+  .md\:col-span-full {
+    @media (width >= 48rem) {
+      grid-column: 1 / -1;
+    }
+  }
   .md\:mx-0 {
     @media (width >= 48rem) {
       margin-inline: calc(var(--spacing) * 0);
@@ -896,6 +919,26 @@
   .md\:mx-auto {
     @media (width >= 48rem) {
       margin-inline: auto;
+    }
+  }
+  .md\:mt-18 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 18);
+    }
+  }
+  .md\:mt-20 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 20);
+    }
+  }
+  .md\:mt-30 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 30);
+    }
+  }
+  .md\:mt-50 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 50);
     }
   }
   .md\:mb-20 {
@@ -943,9 +986,19 @@
       width: auto;
     }
   }
+  .md\:w-lg {
+    @media (width >= 48rem) {
+      width: var(--container-lg);
+    }
+  }
   .md\:w-sm {
     @media (width >= 48rem) {
       width: var(--container-sm);
+    }
+  }
+  .md\:w-xl {
+    @media (width >= 48rem) {
+      width: var(--container-xl);
     }
   }
   .md\:max-w-432 {
@@ -986,6 +1039,11 @@
   .md\:gap-6 {
     @media (width >= 48rem) {
       gap: calc(var(--spacing) * 6);
+    }
+  }
+  .md\:gap-7 {
+    @media (width >= 48rem) {
+      gap: calc(var(--spacing) * 7);
     }
   }
   .md\:gap-8 {
