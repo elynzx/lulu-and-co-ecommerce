@@ -325,6 +325,18 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
+  .h-12 {
+    height: calc(var(--spacing) * 12);
+  }
+  .h-13 {
+    height: calc(var(--spacing) * 13);
+  }
+  .h-14 {
+    height: calc(var(--spacing) * 14);
+  }
   .h-15 {
     height: calc(var(--spacing) * 15);
   }
@@ -369,6 +381,9 @@
   }
   .w-24 {
     width: calc(var(--spacing) * 24);
+  }
+  .w-42 {
+    width: calc(var(--spacing) * 42);
   }
   .w-44 {
     width: calc(var(--spacing) * 44);
@@ -505,6 +520,9 @@
   .overflow-x-hidden {
     overflow-x: hidden;
   }
+  .rounded {
+    border-radius: 0.25rem;
+  }
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
@@ -523,8 +541,14 @@
     border-style: var(--tw-border-style);
     border-width: 2px;
   }
+  .border-\[\#C92B5D\] {
+    border-color: #C92B5D;
+  }
   .border-white {
     border-color: var(--color-white);
+  }
+  .bg-\[\#C92B5D\] {
+    background-color: #C92B5D;
   }
   .bg-\[\#FF6D91\] {
     background-color: #FF6D91;
@@ -870,6 +894,13 @@
       display: flex;
     }
   }
+  .not-even\:transition {
+    &:not(*:nth-child(even)) {
+      transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+      transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+      transition-duration: var(--tw-duration, var(--default-transition-duration));
+    }
+  }
   .hover\:scale-105 {
     &:hover {
       @media (hover: hover) {
@@ -969,6 +1000,21 @@
   .md\:hidden {
     @media (width >= 48rem) {
       display: none;
+    }
+  }
+  .md\:h-14 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 14);
+    }
+  }
+  .md\:h-15 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 15);
+    }
+  }
+  .md\:w-58 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 58);
     }
   }
   .md\:w-120 {
