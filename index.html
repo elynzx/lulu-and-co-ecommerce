@@ -20,16 +20,16 @@
 
 <body class="min-h-screen font-[Karla] text-[18px] overflow-x-hidden">
 
-  <div class="bg-[#FF6D91]">
+  <div class="relative bg-linear-to-b from-[#FF6D91] to-[#FFB9CB]">
 
     <!-- Master wrapper -->
     <div class=" max-w-432 mx-auto px-25">
 
       <!-- Content grid -->
-      <div class="grid grid-cols-12 gap-5 ">
+      <div class="grid grid-cols-12 gap-5 px-10">
 
         <!-- Header -->
-        <header class=" col-span-12 flex justify-between items-center py-10 px-12 font-medium">
+        <header class="col-span-12 flex justify-between items-center py-10 font-medium">
           <img class="" src="./assets/logo.svg" />
 
           <div class="flex gap-12 items-center text-white">
@@ -43,7 +43,7 @@
             </nav>
 
             <button
-              class="transition duration-100 hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full border-2 border-white">Login/Signup
+              class="transition duration-100  hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full border-2 border-white">Login/Signup
             </button>
             <div class="flex gap-5">
               <a href="#"><i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i></a>
@@ -53,8 +53,29 @@
           </div>
         </header>
 
+        <!-- Hero Section -->
+        <section class="col-span-12 flex items-center justify-between gap-5 text-white mb-22">
+          <div class="flex flex-col gap-4">
+            <h2 class="text-4xl uppercase">Sweetness from the Heart of Peru</h2>
+            <p class="w-120">
+              Handcrafted treats powered by Peruvian superfoods. Designed for diabetics, made for everyone.
+            </p>
+            <button
+              class="bg-white text-[#FF6D91] transition duration-100 hover:scale-105 uppercase cursor-pointer w-58 h-15 rounded-full">shop
+              now</button>
+          </div>
+          <div>
+            <img class="w-220 h-auto" src="./assets//cake1.png">
+          </div>
+        </section>
       </div>
     </div>
+    <div class="absolute -bottom-1 left-0 w-full h-8 flex overflow-hidden">
+      <div
+        class="w-full h-full bg-[radial-gradient(circle_at_50%_100%,white_60%,transparent_62%)] bg-size-[52px_34px] bg-repeat-x">
+      </div>
+    </div>
+
   </div>
 
 
