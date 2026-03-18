@@ -274,6 +274,9 @@
   .mx-auto {
     margin-inline: auto;
   }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
@@ -283,8 +286,20 @@
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
+  .mt-12 {
+    margin-top: calc(var(--spacing) * 12);
+  }
   .mt-14 {
     margin-top: calc(var(--spacing) * 14);
+  }
+  .mt-16 {
+    margin-top: calc(var(--spacing) * 16);
+  }
+  .mb-8 {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+  .mb-10 {
+    margin-bottom: calc(var(--spacing) * 10);
   }
   .mb-14 {
     margin-bottom: calc(var(--spacing) * 14);
@@ -303,6 +318,12 @@
   }
   .h-8 {
     height: calc(var(--spacing) * 8);
+  }
+  .h-13 {
+    height: calc(var(--spacing) * 13);
+  }
+  .h-14 {
+    height: calc(var(--spacing) * 14);
   }
   .h-15 {
     height: calc(var(--spacing) * 15);
@@ -348,6 +369,18 @@
   }
   .w-45 {
     width: calc(var(--spacing) * 45);
+  }
+  .w-50 {
+    width: calc(var(--spacing) * 50);
+  }
+  .w-51 {
+    width: calc(var(--spacing) * 51);
+  }
+  .w-52 {
+    width: calc(var(--spacing) * 52);
+  }
+  .w-54 {
+    width: calc(var(--spacing) * 54);
   }
   .w-58 {
     width: calc(var(--spacing) * 58);
@@ -696,6 +729,16 @@
       display: none;
     }
   }
+  .md\:h-1 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 1);
+    }
+  }
+  .md\:h-2 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 2);
+    }
+  }
   .md\:h-12 {
     @media (width >= 48rem) {
       height: calc(var(--spacing) * 12);
@@ -709,6 +752,26 @@
   .md\:h-15 {
     @media (width >= 48rem) {
       height: calc(var(--spacing) * 15);
+    }
+  }
+  .md\:h-412 {
+    @media (width >= 48rem) {
+      height: calc(var(--spacing) * 412);
+    }
+  }
+  .md\:w-50 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 50);
+    }
+  }
+  .md\:w-51 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 51);
+    }
+  }
+  .md\:w-52 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 52);
     }
   }
   .md\:w-54 {
@@ -734,6 +797,11 @@
   .md\:w-220 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 220);
+    }
+  }
+  .md\:w-5110 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 5110);
     }
   }
   .md\:w-auto {
