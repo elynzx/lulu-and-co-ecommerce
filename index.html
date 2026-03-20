@@ -21,80 +21,75 @@
 
 <body class="min-h-screen font-[Karla] text-[18px] overflow-x-hidden">
 
-  <div class="relative bg-linear-to-b from-[#FF6D91] to-[#FFB9CB]">
+  <!-- Header Desktop -->
+  <header
+    class="hidden sticky top-0 z-51 bg-[#FF6D91] md:flex justify-between items-center md:h-26 font-medium w-full md:max-w-432 md:mx-auto md:px-30">
+    <img class="" src="./assets/logo.svg" />
+    <div class="flex gap-12 items-center text-white">
+      <nav>
+        <ul class="flex gap-10 ">
+          <li class=""><a class="underline underline-offset-12 uppercase" href="#">Home</a></li>
+          <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Shop</a></li>
+          <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Blog</a></li>
+          <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <button
+        class="transition duration-100 hover:scale-105 uppercase cursor-pointer w-51 h-14 rounded-full border-2 border-white">Login/Signup</button>
+      <div class="flex gap-5">
+        <a href="#"><i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i></a>
+        <a href="#"><i class="fa-solid fa-heart transition duration-100 hover:scale-110"></i></a>
+        <a href="#"><i class="fa-solid fa-cart-shopping transition duration-100 hover:scale-110"></i></a>
+      </div>
+    </div>
+  </header>
 
+  <div class="relative bg-linear-to-b from-[#FF6D91] to-[#FFB9CB]">
     <!-- Master wrapper -->
     <div class="w-full md:max-w-432 md:mx-auto px-4 md:px-30">
 
-      <!-- Content grid -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+      <!-- Header Mobile -->
+      <header class="flex md:hidden col-span-1 justify-between items-center py-6 px-4 font-medium text-white">
+        <img class="w-24" src="./assets/logo.svg" />
+        <button id="mobile-menu-btn" class="text-3xl focus:outline-none">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </header>
 
-        <!-- Header Desktop -->
-        <header class="hidden md:flex md:col-span-12 justify-between items-center py-10 font-medium">
-          <img class="" src="./assets/logo.svg" />
-          <div class="flex gap-12 items-center text-white">
-            <nav>
-              <ul class="flex gap-10 ">
-                <li class=""><a class="underline underline-offset-12 uppercase" href="#">Home</a></li>
-                <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Shop</a></li>
-                <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Blog</a></li>
-                <li class="transition duration-100 hover:scale-110 uppercase"><a href="#">Contact</a></li>
-              </ul>
-            </nav>
-            <button
-              class="transition duration-100 hover:scale-105 uppercase cursor-pointer w-51 h-14 rounded-full border-2 border-white">Login/Signup</button>
-            <div class="flex gap-5">
-              <a href="#"><i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i></a>
-              <a href="#"><i class="fa-solid fa-heart transition duration-100 hover:scale-110"></i></a>
-              <a href="#"><i class="fa-solid fa-cart-shopping transition duration-100 hover:scale-110"></i></a>
-            </div>
-          </div>
-        </header>
+      <!-- Mobile Menu -->
+      <nav id="mobile-menu"
+        class="fixed inset-0 bg-[#FF6D91] bg-opacity-95 z-50 flex flex-col items-center justify-center text-white text-xl hidden">
+        <button id="mobile-close-menu" class="absolute top-6 right-6 text-3xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <ul class="flex flex-col items-center gap-8 mt-10">
+          <li><a class="uppercase" href="#">Home</a></li>
+          <li><a class="uppercase" href="#">Shop</a></li>
+          <li><a class="uppercase" href="#">Blog</a></li>
+          <li><a class="uppercase" href="#">Contact</a></li>
+          <li><button class="bg-white text-[#FF6D91] rounded-full px-6 py-2 mt-4 uppercase">Login/Signup</button></li>
+        </ul>
+      </nav>
 
-        <!-- Header Mobile -->
-        <header class="flex md:hidden col-span-1 justify-between items-center py-6 px-4 font-medium text-white">
-          <img class="w-24" src="./assets/logo.svg" />
-          <button id="mobile-menu-btn" class="text-3xl focus:outline-none">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-        </header>
-
-        <!-- Mobile Menu -->
-        <nav id="mobile-menu"
-          class="fixed inset-0 bg-[#FF6D91] bg-opacity-95 z-50 flex flex-col items-center justify-center text-white text-xl hidden">
-          <button id="mobile-close-menu" class="absolute top-6 right-6 text-3xl">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <ul class="flex flex-col items-center gap-8 mt-10">
-            <li><a class="uppercase" href="#">Home</a></li>
-            <li><a class="uppercase" href="#">Shop</a></li>
-            <li><a class="uppercase" href="#">Blog</a></li>
-            <li><a class="uppercase" href="#">Contact</a></li>
-            <li><button class="bg-white text-[#FF6D91] rounded-full px-6 py-2 mt-4 uppercase">Login/Signup</button></li>
-          </ul>
-        </nav>
-
-        <!-- Hero Section -->
-        <section
-          class="col-span-1 md:col-span-12 flex flex-col-reverse mb-14 md:flex-row items-center md:justify-between justify-center gap-5 text-white md:py-10 md:mb-25">
-          <div class="flex flex-col gap-8 md:gap-10 w-full md:w-auto items-center md:items-start">
-            <h2 class="font-[League_Spartan] font-semibold text-2xl px-6 md:px-0 md:text-5xl text-center md:text-left">
-              Sweetness from the Heart of
-              Peru
-            </h2>
-            <p class="w-full px-6 md:px-0 md:w-120 md:text-xl text-center md:text-left">
-              Handcrafted treats powered by Peruvian superfoods. Designed for diabetics, made for everyone.
-            </p>
-            <button
-              class="bg-white text-[#FF6D91] font-bold transition duration-100 hover:scale-105 uppercase cursor-pointer w-51 h-14 rounded-full mx-auto md:mx-0">shop
-              now</button>
-          </div>
-          <div class="w-full md:w-auto flex justify-center md:block">
-            <img class="w-full px-4 md:px-0 md:w-220 h-auto" src="./assets/banners/strawberry-cake.png">
-          </div>
-        </section>
-
-      </div>
+      <!-- Hero Section -->
+      <section
+        class="col-span-1 md:col-span-12 flex flex-col-reverse py-12 md:flex-row items-center md:justify-between justify-center gap-5 text-white md:py-20 md:mb-25">
+        <div class="flex flex-col gap-8 md:gap-10 w-full md:w-auto items-center md:items-start">
+          <h2 class="font-[League_Spartan] font-semibold text-2xl px-6 md:px-0 md:text-5xl text-center md:text-left">
+            Sweetness from the Heart of
+            Peru
+          </h2>
+          <p class="w-full px-6 md:px-0 md:w-120 md:text-xl text-center md:text-left">
+            Handcrafted treats powered by Peruvian superfoods. Designed for diabetics, made for everyone.
+          </p>
+          <button
+            class="bg-white text-[#FF6D91] font-bold mb-6 transition duration-100 hover:scale-105 uppercase cursor-pointer w-51 h-14 rounded-full mx-auto md:mx-0 ">shop
+            now</button>
+        </div>
+        <div class="w-full md:w-auto flex justify-center md:block">
+          <img class="w-full px-4 md:px-0 md:w-220 h-auto" src="./assets/banners/strawberry-cake.png">
+        </div>
+      </section>
     </div>
 
     <div class="absolute -bottom-1 left-0 w-full h-8 flex overflow-hidden">
