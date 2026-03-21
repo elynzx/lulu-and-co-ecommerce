@@ -1,6 +1,6 @@
-import { products as productList } from './data'
+import { products as productList } from './data.js'
 
-const createProduct = (product) => ({
+const createCartProduct = (product) => ({
   id: product.id,
   name: product.name,
   price: product.variants[0].price,
@@ -17,7 +17,7 @@ export function addToCart(idProduct) {
   if (existingProduct) {
     existingProduct.qty += 1
   } else {
-    cart.push(createProduct(selectedProduct))
+    cart.push(createCartProduct(selectedProduct))
   }
 
   saveCart()
