@@ -104,6 +104,7 @@
                     <th class="py-3 px-4 text-center font-semibold">Quantity</th>
                     <th class="py-3 px-4 text-center font-semibold">Price</th>
                     <th class="py-3 px-4 text-center font-semibold">Subtotal</th>
+                    <th class="py-3 px-4 text-center font-semibold"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -116,6 +117,7 @@
                     <td class="py-3 px-4 text-center">1</td>
                     <td class="py-3 px-4 text-center">$25.00</td>
                     <td class="py-3 px-4 text-center">$25.00</td>
+                    <td class="text-center text-[#09346d]"><i class="fa-solid fa-trash"></i></td>
                   </tr>
                   <tr class="border-b border-gray-100">
                     <td class="py-3 px-4 flex items-center gap-3">
@@ -139,7 +141,7 @@
                   </tr>
                 </tbody>
                 <tfoot>
-                  <tr class="bg-[#FFB9CB] font-bold">
+                  <tr class="border-t border-gray-300 font-bold">
                     <td colspan="3" class="py-3 px-4 text-right">Total</td>
                     <td class="py-3 px-4 text-center">$78.80</td>
                   </tr>
@@ -148,6 +150,34 @@
             </div>
           </div>
 
+          <!-- Cart summary-->
+          <div class="col-span-1 md:col-span-4 flex flex-col items-center md:items-end md:h-full">
+            <div
+              class="w-full max-w-xs bg-white rounded-lg shadow-lg  p-6 flex flex-col gap-4 md:sticky md:top-0 md:h-full">
+              <h4 class="text-lg font-bold text-[#C92B5D] mb-2 text-center">Order Summary</h4>
+
+              <div class="flex-1 flex flex-col justify-between items-start">
+                <div>
+                  <div class="flex justify-between text-sm">
+                    <span>Subtotal</span>
+                    <span>$78.80</span>
+                  </div>
+                  <div class="flex justify-between text-sm mt-2">
+                    <span>Shipping</span>
+                    <span>$5.00</span>
+                  </div>
+                </div>
+                <div class="flex justify-between w-full text-base font-bold border-t border-gray-100 pt-2 mt-4">
+                  <span>Total</span>
+                  <span>$83.80</span>
+                </div>
+              </div>
+
+              <button
+                class="mt-4 bg-[#FF6D91] text-white font-semibold w-full h-14 rounded-full hover:opacity-90 transition-opacity uppercase">Checkout
+              </button>
+            </div>
+          </div>
 
         </div>
       </section>
