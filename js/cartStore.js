@@ -1,4 +1,4 @@
-import { productList } from './data'
+import { products as productList } from './data'
 
 const createProduct = (product) => ({
   id: product.id,
