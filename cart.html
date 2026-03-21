@@ -85,6 +85,72 @@
     <!-- Master wrapper -->
     <div class="w-full md:max-w-432 md:mx-auto px-4 md:px-30">
 
+      <!-- Cart Section -->
+      <section class="py-22">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 px-4 md:px-10">
+          <!-- Cart Table -->
+          <div class="col-span-1 md:col-span-8 flex flex-col items-center justify-center">
+            <div class="flex flex-col gap-3 md:gap-7 justify-center items-center">
+              <h3
+                class="text-[#C92B5D] font-[League_Spartan] font-semibold text-2xl md:text-5xl text-center md:text-left">
+                Shopping Cart</h3>
+              <p class="text-center text-[16px] md:text-md md:w-xl">Review your order below before checkout.</p>
+            </div>
+            <div class="w-full mt-10">
+              <table class="min-w-full bg-white text-sm">
+                <thead>
+                  <tr class="border-b bortder-gray-300 text-[#09346d]">
+                    <th class="py-3 px-4 text-left font-semibold">Product</th>
+                    <th class="py-3 px-4 text-center font-semibold">Quantity</th>
+                    <th class="py-3 px-4 text-center font-semibold">Price</th>
+                    <th class="py-3 px-4 text-center font-semibold">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 px-4 flex items-center gap-3">
+                      <img class="w-16 h-16 object-contain border border-gray-200 rounded"
+                        src="./assets/products/cuchareable-lucuma.png" alt="Lucuma Cuchareable Cup">
+                      <span class="font-semibold">Lucuma Cuchareable Cup</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">1</td>
+                    <td class="py-3 px-4 text-center">$25.00</td>
+                    <td class="py-3 px-4 text-center">$25.00</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-3 px-4 flex items-center gap-3">
+                      <img class="w-16 h-16 object-contain border border-gray-200 rounded"
+                        src="./assets/products/tres-leches.png" alt="Tres Leches">
+                      <span class="font-semibold">Tres Leches</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">2</td>
+                    <td class="py-3 px-4 text-center">$19.90</td>
+                    <td class="py-3 px-4 text-center">$39.80</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4 flex items-center gap-3">
+                      <img class="w-16 h-16 object-contain border border-gray-200 rounded"
+                        src="./assets/products/truffles.png" alt="Truffles">
+                      <span class="font-semibold">Truffles</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">1</td>
+                    <td class="py-3 px-4 text-center">$14.00</td>
+                    <td class="py-3 px-4 text-center">$14.00</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="bg-[#FFB9CB] font-bold">
+                    <td colspan="3" class="py-3 px-4 text-right">Total</td>
+                    <td class="py-3 px-4 text-center">$78.80</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+
+        </div>
+      </section>
 
     </div>
   </main>
