@@ -1,74 +1,62 @@
-const products = [
-  {
-    id: 1,
-    name: "Lúcuma Gold Mini Cake",
-    urlName: "lucuma-gold-mini-cake",
-    category: "Mini Cakes",
-    description: "14cm almond cake with silky Peruvian Lúcuma fudge and apple puree.",
-    tags: ["Gluten-Free", "Keto"],
-    variants: [{ sku: "TORT-LUC-14", size: "14 cm", price: 22.00, stock: 5 }],
-    image: "assets/products/mini-lucuma.png"
-  },
-  {
-    id: 2,
-    name: "Aguaymanto Zest Mini Cake",
-    urlName: "aguaymanto-mini-cake",
-    category: "Mini Cakes",
-    description: "Zesty Andean Golden Berry cake with Greek yogurt frosting.",
-    tags: ["Gluten-Free", "Lactose-Free"],
-    variants: [{ sku: "TORT-AGU-14", size: "14 cm", price: 24.00, stock: 4 }],
-    image: "assets/products/mini-aguaymanto.png"
-  },
-  {
-    id: 3,
-    name: "Lúcuma Cuchareable Cup",
-    urlName: "lucuma-cuchareable",
-    category: "Desserts",
-    description: "Traditional Peruvian 'spoonable' dessert with 80% cacao and Lúcuma pulp.",
-    tags: ["Gluten-Free", "Vegan"],
-    variants: [
-      { sku: "CUCH-LUC-8OZ", size: "8 oz", price: 5.90, stock: 20 },
-      { sku: "MEGA-LUC-1.2KG", size: "1.2 kg (Family)", price: 29.00, stock: 8 }
-    ],
-    image: "assets/products/cuchareable-lucuma.png"
-  },
-  {
-    id: 4,
-    name: "3 Leches Cuchareable Cup",
-    urlName: "tres-leches-cuchareable",
-    category: "Desserts",
-    description: "Almond sponge soaked in coconut milk with fresh Aguaymanto topping.",
-    tags: ["Lactose-Free", "Keto"],
-    variants: [
-      { sku: "CUCH-3L-8OZ", size: "8 oz", price: 5.90, stock: 15 },
-      { sku: "MEGA-3L-1.2KG", size: "1.2 kg (Family)", price: 27.00, stock: 6 }
-    ],
-    image: "assets/products/tres-leches.png"
-  },
-  {
-    id: 5,
-    name: "Strawberry Cuchareable Cup",
-    urlName: "strawberry-cuchareable",
-    category: "Desserts",
-    description: "Fresh organic strawberries layered with light cream and almond crumble.",
-    tags: ["Gluten-Free", "Low-Sugar"],
-    variants: [{ sku: "CUCH-STR-8OZ", size: "8 oz", price: 6.20, stock: 12 }],
-    image: "assets/products/cuchareable-strawberry.png"
-  },
-  {
-    id: 6,
-    name: "Inca Cacao Bonbons",
-    urlName: "inca-cacao-bonbons",
-    category: "Snacks",
-    description: "Raw Amazonian cacao bonbons with a creamy peanut butter center.",
-    tags: ["Keto", "Vegan"],
-    variants: [{ sku: "BOMB-FIT-6", size: "Box x6", price: 6.00, stock: 30 }],
-    image: "assets/products/truffles.png"
-  }
-];
+import { products as productList } from "./data.js";
+import { addToCart, cart, getCartTotal } from "./cartStore.js";
 
 /* Mobile Menu */
-const menuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const closeMenu = document.getElementById('mobile-close-menu');
+const menuBtn = document.getElementById("mobile-menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+const closeMenu = document.getElementById("mobile-close-menu");
 
+/* Products */
+const productsGrid = document.getElementById("products-grid");
+
+function renderProducts() {
+    if (!productsGrid) {
+        return;
+    }
+
+    productsGrid.innerHTML = productList
+        .map(
+            (product) => `
+    <div class="col-span-1 md:col-span-4 relative">
+      <div class="border border-gray-400/50 p-6 md:p-10 w-full flex flex-col justify-between md:h-110 ">
+        <div>
+          <span class="text-[#09346d] text-xl md:text-2xl font-semibold font-[League_Spartan]">${product.name}</span>
+          <div class="text-gray-400 text-sm">
+          ${product.tags
+              .map(
+                  (tag, index) => `
+          <span>${tag}</span>
+          ${index < product.tags.length - 1 ? "<span> | </span>" : ""}
+          `,
+              )
+              .join("")}
+          </div>
+        </div>
+        <div class="flex w-full items-center justify-center">
+          <img class="max-h-60 object-contain transition-transform duration-500 hover:scale-105"
+            src="${product.image}">
+        </div>
+        <div class="text-[#C92B5D] text-3xl font-bold flex"> 
+        ${product.variants
+            .map(
+                (variant, index) => `
+        <span class="">$. ${variant.price} ${index < product.variants.length - 1 ? "<span> - </span>" : ""}
+        </span>
+        `,
+            )
+            .join("")}
+        </div>
+      </div>
+      <button
+        class="absolute w-22 h-22 z-50 -top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
+        <i class="fa fa-plus-circle text-[#C92B5D] text-5xl md:text-6xl"></i>
+      </button>
+    </div>
+  `,
+        )
+        .join("");
+
+    console.log(productList);
+}
+
+renderProducts();
