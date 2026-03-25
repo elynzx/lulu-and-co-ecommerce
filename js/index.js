@@ -6,7 +6,6 @@ const menuBtn = document.getElementById("mobile-menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
 const closeMenu = document.getElementById("mobile-close-menu");
 
-/* Products */
 const productsGrid = document.getElementById("products-grid");
 
 function renderProducts() {
@@ -37,19 +36,16 @@ function renderProducts() {
             src="${product.image}">
         </div>
         <div class="text-[#C92B5D] text-3xl font-bold flex"> 
-        ${product.variants
-            .map(
-                (variant, index) => `
-        <span class="">$. ${variant.price} ${index < product.variants.length - 1 ? "<span> - </span>" : ""}
-        </span>
-        `,
-            )
-            .join("")}
+  ${
+      product.variants.length > 1
+          ? `$${product.variants[0].price.toFixed(2)} - $${product.variants[product.variants.length - 1].price.toFixed(2)}`
+          : `$${product.variants[0].price.toFixed(2)}`
+  }
         </div>
       </div>
-      <button
-        class="absolute w-22 h-22 z-50 -top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
-        <i class="fa fa-plus-circle text-[#C92B5D] text-5xl md:text-6xl"></i>
+      <button data-id="${product.id}"  
+        class="add-btn absolute w-22 h-22 z-50 -top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
+        <i class="fa fa-plus-circle text-[#C92B5D] text-5xl md:text-6xl pointer-events-none"></i>
       </button>
     </div>
   `,
@@ -58,5 +54,14 @@ function renderProducts() {
 
     console.log(productList);
 }
+
+productsGrid?.addEventListener("click", (e) => {
+    const addButton = e.target.closest(".add-btn");
+    if (addButton) {
+        const id = Number(addButton.dataset.id);
+        addToCart(id);
+        console.log("Producto añadido", id);
+    }
+});
 
 renderProducts();
