@@ -1,10 +1,8 @@
 import { products as productList } from "./data.js";
-import { addToCart, cart, getCartTotal } from "./cartStore.js";
+import { addToCart, cart, getCartTotal, getCartCount } from "./cartStore.js";
+import { renderHeader } from "./ui.js";
 
-/* Mobile Menu */
-const menuBtn = document.getElementById("mobile-menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
-const closeMenu = document.getElementById("mobile-close-menu");
+renderHeader(getCartCount());
 
 const productsGrid = document.getElementById("products-grid");
 
@@ -61,6 +59,7 @@ productsGrid?.addEventListener("click", (e) => {
         const id = Number(addButton.dataset.id);
         addToCart(id);
         console.log("Producto añadido", id);
+        renderHeader(getCartCount());
     }
 });
 
