@@ -2,7 +2,7 @@ import { products as productList } from "./data.js";
 import { addToCart, cart, getCartTotal, getCartCount } from "./cartStore.js";
 import { renderHeader } from "./ui.js";
 
-renderHeader(getCartCount());
+renderHeader(cart);
 
 const productsGrid = document.getElementById("products-grid");
 
@@ -56,7 +56,7 @@ productsGrid?.addEventListener("click", (e) => {
     if (addButton) {
         const id = Number(addButton.dataset.id);
         addToCart(id);
-        renderHeader(getCartCount());
+        renderHeader(cart);
     }
 });
 
