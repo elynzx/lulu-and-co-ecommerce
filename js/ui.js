@@ -1,3 +1,5 @@
+import { getCartCount } from "./cartStore.js";
+
 const Logo = () => `<img class="w-24 md:w-auto" src="./assets/logo.svg" />`;
 
 const NavLinks = () => `
@@ -60,10 +62,8 @@ export function renderHeader(cartList = []) {
     const container = document.getElementById("main-header-container");
     if (!container) return;
 
-    const cartCount = cartList.reduce(
-        (total, item) => total + item.quantity,
-        0,
-    );
+    const cartCount = getCartCount();
+
     container.innerHTML = `
     <header class="text-white w-full">
       
