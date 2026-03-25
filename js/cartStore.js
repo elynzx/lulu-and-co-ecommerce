@@ -1,4 +1,8 @@
-import { products as productList } from "./data.js";
+let productList = [];
+
+export function setProductList(products) {
+    productList = products;
+}
 
 const createCartProduct = (product) => ({
     id: product.id,
