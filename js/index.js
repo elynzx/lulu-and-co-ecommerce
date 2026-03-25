@@ -49,8 +49,6 @@ function renderProducts() {
   `,
         )
         .join("");
-
-    console.log(productList);
 }
 
 productsGrid?.addEventListener("click", (e) => {
@@ -58,7 +56,6 @@ productsGrid?.addEventListener("click", (e) => {
     if (addButton) {
         const id = Number(addButton.dataset.id);
         addToCart(id);
-        console.log("Producto añadido", id);
         renderHeader(getCartCount());
     }
 });
