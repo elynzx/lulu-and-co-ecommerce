@@ -262,6 +262,9 @@
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
+  .z-5 {
+    z-index: 5;
+  }
   .z-10 {
     z-index: 10;
   }
