@@ -26,6 +26,11 @@ export function addToCart(idProduct) {
 
 const saveCart = () => localStorage.setItem("cartUser", JSON.stringify(cart));
 
+export function getCartCount() {
+    const incrementTotalQuantity = (total, item) => total + item.quantity;
+    return cart.reduce(incrementTotalQuantity, 0);
+}
+
 export function getCartTotal() {
     const incrementTotalPrice = (total, item) =>
         total + item.price * item.quantity;
