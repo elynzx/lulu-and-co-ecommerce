@@ -1,13 +1,44 @@
-import { products as productList } from "./data.js";
-import { addToCart, cart, getCartTotal, getCartCount } from "./cartStore.js";
+import {
+    addToCart,
+    cart,
+    getCartTotal,
+    getCartCount,
+    setProductList,
+} from "./cartStore.js";
 import { renderHeader } from "./ui.js";
 
-renderHeader(cart);
-
+const API_URL =
+    "https://raw.githubusercontent.com/elynzx/lulu-co-api/refs/heads/main/products.json";
 const productsGrid = document.getElementById("products-grid");
 
-function renderProducts() {
-    if (!productsGrid) {
+async function loadApp() {
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+            throw new Error(`Response error: ${response.status}`);
+        }
+
+        const productList = await response.json();
+
+        setProductList(productList);
+        renderProducts(productList);
+        renderHeader(cart);
+    } catch (error) {
+        console.error("Failed to fetch:", error.message);
+
+        const productsGrid = document.getElementById("products-grid");
+        if (productsGrid) {
+            productsGrid.innerHTML = `
+            <p class="col-span-full text-center py-20 text-gray-500 italic">
+                We're sorry, we couldn't load the treats right now. Please try again later.
+            </p>
+          `;
+        }
+    }
+}
+
+function renderProducts(productList) {
+    if (!productsGrid || !productList) {
         return;
     }
 
@@ -60,4 +91,4 @@ productsGrid?.addEventListener("click", (e) => {
     }
 });
 
-renderProducts();
+loadApp();
