@@ -15,7 +15,7 @@ function renderProducts() {
         .map(
             (product) => `
     <div class="col-span-1 md:col-span-4 relative">
-      <div class="border border-gray-400/50 p-6 md:p-10 w-full flex flex-col justify-between md:h-110 ">
+      <div class="border border-gray-400/50 px-6 gap-4 py-10 md:p-10 w-full flex flex-col justify-between md:h-110 ">
         <div>
           <span class="text-[#09346d] text-xl md:text-2xl font-semibold font-[League_Spartan]">${product.name}</span>
           <div class="text-gray-400 text-sm">
@@ -42,7 +42,7 @@ function renderProducts() {
         </div>
       </div>
       <button data-id="${product.id}"  
-        class="add-btn absolute w-22 h-22 z-50 -top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
+        class="add-btn absolute w-18 h-auto cursor-pointer md:w-22 md:h-22 z-50 -top-4 md:-top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
         <i class="fa fa-plus-circle text-[#C92B5D] text-5xl md:text-6xl pointer-events-none"></i>
       </button>
     </div>
