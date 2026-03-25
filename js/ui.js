@@ -19,40 +19,51 @@ const CartBadge = (count) => `
 
 const CartButton = (count, isMobile) => `
   <div class="relative flex items-center">
-    <a href="./cart.html" ${isMobile ? '' : 'id="cart-btn-desktop"'} class="flex items-center">
+    <a href="./cart.html" ${isMobile ? "" : 'id="cart-btn-desktop"'} class="flex items-center">
       <i class="fa-solid fa-cart-shopping text-2xl"></i>
     </a>
     ${CartBadge(count)}
   </div>      
 `;
 
-const CartModal = () => `
-  <div id="cart-modal" class="absolute z-51 md:top-22 md:right-30 px-4 bg-white/95 w-85 shadow-xl hidden text-[#09346d]">
-    <div id="cart-modal-content" class="flex flex-col gap-4 p-2 items-center">
-      <!-- Product -->
-      <div class="border border-gray-400/50 w-full p-4 flex gap-6">
-        <img class="w-25" src="./assets/products/cuchareable-lucuma.png">
-        <div class="flex flex-col justify-center">
-          <span class="text-[#09346d] text-lg font-semibold font-[League_Spartan]">Lucuma Cuchareable Cup</span>
-          <div>
-            <p class="text-gray-400 text-sm">Cantidad: <span class="font-bold">1</span></p>
-          </div>
-          <div>
-            <p class="text-gray-400 text-sm">Total: <span class="font-bold">$ 25.00</span></p>
-          </div>
+const CartModalProduct = (item) => `
+    <div class="border border-gray-400/50 w-full px-4 h-32 flex gap-2 items-center">
+      <img class="w-25 h-auto object-contain p-3 shrink-0" src="${item.image}">
+      <div class="flex flex-col justify-center h-32 min-w-0 gap-1">
+        <span class="text-[#09346d] text-lg font-semibold font-[League_Spartan]">${item.name}</span>
+        <div>
+          <p class="text-gray-400 text-sm">Quantity: <span class="font-bold">${item.quantity}</span></p>
+        </div>
+        <div>
+          <p class="text-gray-400 text-sm">Total: <span class="font-bold">$ ${(item.price * item.quantity).toFixed(2)}</span></p>
         </div>
       </div>
     </div>
-    <div class="p-4 flex justify-center">
+`;
+
+const CartModal = (cartList) => `
+  <div id="cart-modal" class="absolute z-51 md:top-22 md:right-30 px-4 bg-white/95 h-160 w-100 shadow-xl hidden text-[#09346d]">
+    <div id="cart-modal-content" class="flex flex-col gap-4 p-2 items-center max-h-125 overflow-y-auto mt-6">
+      ${
+          cartList.length > 0
+              ? cartList.map((item) => CartModalProduct(item)).join("")
+              : '<p class="py-10 text-gray-400">Your cart is empty.</p>'
+      }
+    </div>
+    <div class="flex justify-center items-center h-30">
        <a href="./cart.html" class="text-center border-2 border-[#FF6D91] text-[#FF6D91] font-bold uppercase w-50 py-3 rounded-full">View Cart</a>
     </div>
   </div>
 `;
 
-export function renderHeader(cartCount = 0) {
+export function renderHeader(cartList = []) {
     const container = document.getElementById("main-header-container");
     if (!container) return;
 
+    const cartCount = cartList.reduce(
+        (total, item) => total + item.quantity,
+        0,
+    );
     container.innerHTML = `
     <header class="text-white w-full">
       
@@ -65,10 +76,10 @@ export function renderHeader(cartCount = 0) {
           <div class="flex gap-10 relative">
             <a href="#"><i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i></a>
             <a href="#"><i class="fa-solid fa-heart transition duration-100 hover:scale-110"></i></a>
-            ${CartButton(cartCount , false)}
+            ${CartButton(cartCount, false)}
           </div>
         </div>
-        ${CartModal()}
+        ${CartModal(cartList)}
       </div>
 
       <!-- Mobile -->
@@ -93,19 +104,32 @@ export function renderHeader(cartCount = 0) {
 }
 
 function setupEventListeners() {
-
     const menuBtn = document.getElementById("mobile-menu-btn");
     const closeBtn = document.getElementById("mobile-close-menu");
     const mobileMenu = document.getElementById("mobile-menu");
-    
+
     const desktopCartBtn = document.getElementById("cart-btn-desktop");
     const cartModal = document.getElementById("cart-modal");
 
-    menuBtn?.addEventListener("click", () => mobileMenu.classList.remove("hidden"));
-    closeBtn?.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+    menuBtn?.addEventListener("click", () =>
+        mobileMenu.classList.remove("hidden"),
+    );
+    closeBtn?.addEventListener("click", () =>
+        mobileMenu.classList.add("hidden"),
+    );
 
     desktopCartBtn?.addEventListener("click", (e) => {
         e.preventDefault();
         cartModal?.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!cartModal || cartModal.classList.contains("hidden")) return;
+        if (
+            !cartModal.contains(e.target) &&
+            !desktopCartBtn.contains(e.target)
+        ) {
+            cartModal.classList.add("hidden");
+        }
     });
 }
