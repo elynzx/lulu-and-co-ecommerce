@@ -17,7 +17,7 @@ export function addToCart(idProduct) {
     const existingProduct = cart.find((product) => product.id === idProduct);
 
     if (existingProduct) {
-        existingProduct.qty += 1;
+        existingProduct.quantity += 1;
     } else {
         cart.push(createCartProduct(selectedProduct));
     }
