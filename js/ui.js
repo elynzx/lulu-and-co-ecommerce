@@ -1,4 +1,4 @@
-import { getCartCount } from "./cartStore.js";
+import { getCartCount, getCartTotal } from "./cartStore.js";
 
 const Logo = () => `<img class="w-24 md:w-auto" src="./assets/logo.svg" />`;
 
@@ -132,4 +132,82 @@ function setupEventListeners() {
             cartModal.classList.add("hidden");
         }
     });
+}
+
+/* Cart.html view */
+
+const CartTableRow = (item) => `
+  <tr class="border-b border-gray-100">
+    <td class="py-4 px-4 flex items-center gap-3">
+      <img class="w-16 h-16 object-contain border border-gray-200 rounded" src="${item.image}" alt="${item.name}">
+      <span class="font-semibold text-[#09346d]">${item.name}</span>
+    </td>
+    <td class="py-4 px-4 text-center font-medium">${item.quantity}</td>
+    <td class="py-4 px-4 text-center text-gray-600">$${item.price.toFixed(2)}</td>
+    <td class="py-4 px-4 text-center font-bold text-[#09346d]">$${(item.price * item.quantity).toFixed(2)}</td>
+    <td class="text-center">
+      <button class="js-remove-item text-[#C92B5D] hover:scale-110 transition-transform cursor-pointer" data-id="${item.id}">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </td>
+  </tr>
+`;
+
+const OrderSummary = (subtotal) => {
+    const shipping = 5.0;
+    const total = subtotal + shipping;
+
+    return `
+    <div class="w-full max-h-full bg-white rounded-xl shadow-lg border border-gray-400/20 p-6 flex flex-col gap-4 md:top-32">
+      <h4 class="text-lg font-bold text-[#C92B5D] mb-2 text-center underline underline-offset-8">Order Summary</h4>
+      <div class="flex flex-col gap-3 mt-4">
+        <div class="flex justify-between text-sm text-gray-600">
+          <span>Subtotal</span>
+          <span class="font-bold text-[#09346d]">$${subtotal.toFixed(2)}</span>
+        </div>
+        <div class="flex justify-between text-sm text-gray-600">
+          <span>Shipping</span>
+          <span class="font-bold text-[#09346d]">$${shipping.toFixed(2)}</span>
+        </div>
+        <div class="flex justify-between w-full text-base font-bold border-t border-gray-100 pt-4 mt-2 text-[#09346d]">
+          <span>Total</span>
+          <span class="text-xl">$${total.toFixed(2)}</span>
+        </div>
+      </div>
+      <button class="mt-6 py-2 w-full md:h-14 font-bold rounded-full bg-[#C92B5D] text-white hover:bg-[#af234f] transition-colors uppercase">
+        Proceed to checkout
+      </button>
+    </div>
+  `;
+};
+
+export function renderCartPage(cartList = []) {
+    const tableBody = document.getElementById("cart-table-body");
+    const summaryContainer = document.getElementById("order-summary-container");
+    const tableFooterTotal = document.getElementById("table-footer-total");
+
+    if (!tableBody || !summaryContainer) return;
+
+    if (cartList.length === 0) {
+        document.querySelector("section.py-22").innerHTML = `
+      <div class="flex flex-col items-center py-20 gap-6">
+        <i class="fa-solid fa-cart-shopping text-6xl text-gray-200"></i>
+        <p class="text-xl text-gray-500 italic">Your shopping cart is empty</p>
+        <a href="index.html" class="bg-[#FF6D91] text-white px-8 py-3 rounded-full font-bold uppercase">Go back to shop</a>
+      </div>
+    `;
+        return;
+    }
+
+    tableBody.innerHTML = cartList.map((item) => CartTableRow(item)).join("");
+
+    const subtotal = cartList.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0,
+    );
+
+    if (tableFooterTotal)
+        tableFooterTotal.innerText = `$${subtotal.toFixed(2)}`;
+
+    summaryContainer.innerHTML = OrderSummary(subtotal);
 }
