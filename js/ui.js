@@ -156,10 +156,17 @@ const CartTableRow = (item) => `
 const OrderSummary = (subtotal) => {
     const shipping = 5.0;
     const total = subtotal + shipping;
+    const productCount = getCartCount();
 
     return `
     <div class="w-full max-h-full bg-white rounded-xl shadow-lg border border-gray-400/20 p-6 flex flex-col gap-4 md:top-32">
       <h4 class="text-lg font-bold text-[#C92B5D] mb-2 text-center underline underline-offset-8">Order Summary</h4>
+      <div class="flex flex-col gap-3 mt-4 border-b border-gray-100">
+        <div class="flex justify-between text-sm text-gray-600 space-y-3">
+          <span>Products (${productCount})</span>
+          <span class="font-bold text-[#09346d]">$${subtotal.toFixed(2)}</span>
+        </div>
+      </div>
       <div class="flex flex-col gap-3 mt-4">
         <div class="flex justify-between text-sm text-gray-600">
           <span>Subtotal</span>
@@ -174,7 +181,7 @@ const OrderSummary = (subtotal) => {
           <span class="text-xl">$${total.toFixed(2)}</span>
         </div>
       </div>
-      <button class="mt-6 py-2 w-full md:h-14 font-bold rounded-full bg-[#C92B5D] text-white hover:bg-[#af234f] transition-colors uppercase">
+      <button class="mt-6 py-2 w-full md:h-14 font-bold rounded-full bg-[#C92B5D] cursor-pointer text-white hover:bg-[#af234f] transition-colors uppercase">
         Proceed to checkout
       </button>
     </div>
