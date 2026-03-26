@@ -192,11 +192,12 @@ export function renderCartPage(cartList = []) {
     const tableBody = document.getElementById("cart-table-body");
     const summaryContainer = document.getElementById("order-summary-container");
     const tableFooterTotal = document.getElementById("table-footer-total");
+    const cartSection = document.getElementById("cart-section");
 
     if (!tableBody || !summaryContainer) return;
 
     if (cartList.length === 0) {
-        document.querySelector("section.py-22").innerHTML = `
+        cartSection.innerHTML = `
       <div class="flex flex-col items-center py-20 gap-6">
         <i class="fa-solid fa-cart-shopping text-6xl text-gray-200"></i>
         <p class="text-xl text-gray-500 italic">Your shopping cart is empty</p>
