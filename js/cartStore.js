@@ -35,8 +35,12 @@ export function getCartCount() {
     return cart.reduce(incrementTotalQuantity, 0);
 }
 
-export function getCartTotal() {
+export function getCartSubtotal() {
     const incrementTotalPrice = (total, item) =>
         total + item.price * item.quantity;
     return cart.reduce(incrementTotalPrice, 0);
+}
+
+export function getCartTotal(subtotal, shipping = 5) {
+    return subtotal + shipping;
 }
