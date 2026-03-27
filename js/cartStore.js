@@ -1,8 +1,15 @@
 let productList = [];
+let cart = JSON.parse(localStorage.getItem("cartUser")) || [];
 
 export function setProductList(products) {
     productList = products;
 }
+
+export function getCart() {
+    return cart;
+}
+
+const saveCart = () => localStorage.setItem("cartUser", JSON.stringify(cart));
 
 const createCartProduct = (product) => ({
     id: product.id,
@@ -12,17 +19,14 @@ const createCartProduct = (product) => ({
     quantity: 1,
 });
 
-export let cart = JSON.parse(localStorage.getItem("cartUser")) || [];
-
-export function addToCart(idProduct) {
-
+export function addToCart(productId) {
     const selectedProduct = productList.find(
-        (product) => String(product.id) === String(idProduct),
+        (product) => String(product.id) === String(productId),
     );
-    if (!selectedProduct) return; 
+    if (!selectedProduct) return;
 
     const existingProduct = cart.find(
-        (product) => String(product.id) === String(idProduct),
+        (product) => String(product.id) === String(productId),
     );
 
     if (existingProduct) {
@@ -33,8 +37,30 @@ export function addToCart(idProduct) {
     saveCart();
 }
 
+export function removeFromCart(productId) {
+    const productIndex = cart.findIndex(
+        (product) => String(product.id) === String(productId),
+    );
+    if (productIndex !== -1) cart.splice(productIndex, 1);
+    saveCart();
+}
 
-const saveCart = () => localStorage.setItem("cartUser", JSON.stringify(cart));
+export function updateCartQuantity(productId, action) {
+    const item = cart.find(
+        (product) => String(product.id) === String(productId),
+    );
+    if (!item) return;
+
+    if (action === "increase") {
+        item.quantity += 1;
+    } else if (action === "decrease") {
+        item.quantity -= 1;
+        if (item.quantity <= 0) {
+            removeFromCart(productId);
+        }
+    }
+    saveCart();
+}
 
 export function getCartCount() {
     const incrementTotalQuantity = (total, item) => total + item.quantity;
@@ -49,21 +75,4 @@ export function getCartSubtotal() {
 
 export function getCartTotal(subtotal, shipping) {
     return subtotal + shipping;
-}
-
-export function updateCartQuantity(id, action) {
-    const item = cart.find((product) => String(product.id) === String(id));
-    if (!item) return;
-    if (action === "increase") {
-        item.quantity += 1;
-    } else if (action === "decrease") {
-        item.quantity -= 1;
-        if (item.quantity <= 0) {
-            const idx = cart.findIndex(
-                (product) => String(product.id) === String(id),
-            );
-            if (idx !== -1) cart.splice(idx, 1);
-        }
-    }
-    saveCart();
 }
