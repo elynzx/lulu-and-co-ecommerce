@@ -204,7 +204,7 @@ const CartTableRow = (item) => `
     <td class="py-4 px-4 text-center text-gray-600">$${item.price.toFixed(2)}</td>
     <td class="py-4 px-4 text-center font-bold text-[#09346d]">$${(item.price * item.quantity).toFixed(2)}</td>
     <td class="text-center">
-      <button class="js-remove-item text-[#C92B5D] hover:scale-110 transition-transform cursor-pointer" data-id="${item.id}">
+      <button class="js-remove-btn text-[#C92B5D] hover:scale-110 transition-transform cursor-pointer" data-id="${item.id}">
         <i class="fa-solid fa-trash"></i>
       </button>
     </td>
