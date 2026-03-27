@@ -5,7 +5,12 @@ import {
     removeFromCart,
     updateCartQuantity,
 } from "./cartStore.js";
-import { renderHeader, renderProducts, renderCartPage } from "./ui.js";
+import {
+    renderHeader,
+    renderProducts,
+    renderFooter,
+    renderCartPage,
+} from "./ui.js";
 
 const API_URL =
     "https://raw.githubusercontent.com/elynzx/lulu-co-api/refs/heads/main/products.json";
@@ -22,6 +27,7 @@ async function loadApp() {
 
         renderProducts(productList);
         renderHeader(getCart());
+        renderFooter();
         renderCartPage(getCart());
     } catch (error) {
         console.error("Failed to fetch:", error.message);
