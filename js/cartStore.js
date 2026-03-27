@@ -15,10 +15,15 @@ const createCartProduct = (product) => ({
 export let cart = JSON.parse(localStorage.getItem("cartUser")) || [];
 
 export function addToCart(idProduct) {
+
     const selectedProduct = productList.find(
-        (product) => product.id === idProduct,
+        (product) => String(product.id) === String(idProduct),
     );
-    const existingProduct = cart.find((product) => product.id === idProduct);
+    if (!selectedProduct) return; 
+
+    const existingProduct = cart.find(
+        (product) => String(product.id) === String(idProduct),
+    );
 
     if (existingProduct) {
         existingProduct.quantity += 1;
@@ -27,6 +32,7 @@ export function addToCart(idProduct) {
     }
     saveCart();
 }
+
 
 const saveCart = () => localStorage.setItem("cartUser", JSON.stringify(cart));
 
