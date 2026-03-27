@@ -2,8 +2,6 @@ import {
     getCartCount,
     getCartTotal,
     getCartSubtotal,
-    updateCartQuantity,
-    cart,
 } from "./cartStore.js";
 
 const Logo = () => `<img class="w-24 md:w-auto" src="./assets/logo.svg" />`;
@@ -140,7 +138,55 @@ function setupEventListeners() {
     });
 }
 
-/* Cart.html view */
+/* Products */
+export function renderProducts(productList) {
+    const productsGrid = document.getElementById("products-grid");
+
+    if (!productsGrid || !productList) {
+        return;
+    }
+
+    productsGrid.innerHTML = productList
+        .map(
+            (product) => `
+    <div class="col-span-1 md:col-span-4 relative">
+      <div class="border border-gray-400/50 px-6 gap-4 py-10 md:p-10 w-full flex flex-col justify-between md:h-110 ">
+        <div>
+          <span class="text-[#09346d] text-xl md:text-2xl font-semibold font-[League_Spartan]">${product.name}</span>
+          <div class="text-gray-400 text-sm">
+          ${product.tags
+              .map(
+                  (tag, index) => `
+          <span>${tag}</span>
+          ${index < product.tags.length - 1 ? "<span> | </span>" : ""}
+          `,
+              )
+              .join("")}
+          </div>
+        </div>
+        <div class="flex w-full items-center justify-center">
+          <img class="max-h-60 object-contain transition-transform duration-500 hover:scale-105"
+            src="${product.image}">
+        </div>
+        <div class="text-[#C92B5D] text-3xl font-bold flex"> 
+  ${
+      product.variants.length > 1
+          ? `$${product.variants[0].price.toFixed(2)} - $${product.variants[product.variants.length - 1].price.toFixed(2)}`
+          : `$${product.variants[0].price.toFixed(2)}`
+  }
+        </div>
+      </div>
+      <button data-id="${product.id}"  
+        class="add-btn absolute w-18 h-auto cursor-pointer md:w-22 md:h-22 z-50 -top-4 md:-top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
+        <i class="fa fa-plus-circle text-[#C92B5D] text-5xl md:text-6xl pointer-events-none"></i>
+      </button>
+    </div>
+  `,
+        )
+        .join("");
+}
+
+/* Cart page */
 
 const CartTableRow = (item) => `
   <tr class="border-b border-gray-100">
@@ -203,7 +249,6 @@ const OrderSummary = (subtotal) => {
 export function renderCartPage(cartList = []) {
     const tableBody = document.getElementById("cart-table-body");
     const summaryContainer = document.getElementById("order-summary-container");
-    const tableFooterTotal = document.getElementById("table-footer-total");
     const cartSection = document.getElementById("cart-section");
 
     if (!tableBody || !summaryContainer) return;
@@ -220,19 +265,5 @@ export function renderCartPage(cartList = []) {
     }
 
     tableBody.innerHTML = cartList.map((item) => CartTableRow(item)).join("");
-
-    tableBody.querySelectorAll(".js-qty-btn").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            const id = btn.getAttribute("data-id");
-            const action = btn.getAttribute("data-action");
-            updateCartQuantity(id, action);
-            renderCartPage(cart);
-            renderHeader(cart);
-        });
-    });
-
-    if (tableFooterTotal)
-        tableFooterTotal.innerText = `$${getCartSubtotal().toFixed(2)}`;
-
     summaryContainer.innerHTML = OrderSummary(getCartSubtotal());
 }
