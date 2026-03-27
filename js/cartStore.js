@@ -44,3 +44,20 @@ export function getCartSubtotal() {
 export function getCartTotal(subtotal, shipping) {
     return subtotal + shipping;
 }
+
+export function updateCartQuantity(id, action) {
+    const item = cart.find((product) => String(product.id) === String(id));
+    if (!item) return;
+    if (action === "increase") {
+        item.quantity += 1;
+    } else if (action === "decrease") {
+        item.quantity -= 1;
+        if (item.quantity <= 0) {
+            const idx = cart.findIndex(
+                (product) => String(product.id) === String(id),
+            );
+            if (idx !== -1) cart.splice(idx, 1);
+        }
+    }
+    saveCart();
+}
