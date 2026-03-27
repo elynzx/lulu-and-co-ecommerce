@@ -41,6 +41,6 @@ export function getCartSubtotal() {
     return cart.reduce(incrementTotalPrice, 0);
 }
 
-export function getCartTotal(subtotal, shipping = 5) {
+export function getCartTotal(subtotal, shipping) {
     return subtotal + shipping;
 }

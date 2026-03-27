@@ -1,4 +1,4 @@
-import { getCartCount, getCartTotal } from "./cartStore.js";
+import { getCartCount, getCartTotal, getCartSubtotal } from "./cartStore.js";
 
 const Logo = () => `<img class="w-24 md:w-auto" src="./assets/logo.svg" />`;
 
@@ -154,8 +154,8 @@ const CartTableRow = (item) => `
 `;
 
 const OrderSummary = (subtotal) => {
-    const shipping = 5.0;
-    const total = subtotal + shipping;
+    const shipping = 5;
+    const total = getCartTotal(subtotal, shipping);
     const productCount = getCartCount();
 
     return `
@@ -209,13 +209,8 @@ export function renderCartPage(cartList = []) {
 
     tableBody.innerHTML = cartList.map((item) => CartTableRow(item)).join("");
 
-    const subtotal = cartList.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0,
-    );
-
     if (tableFooterTotal)
         tableFooterTotal.innerText = `$${subtotal.toFixed(2)}`;
 
-    summaryContainer.innerHTML = OrderSummary(subtotal);
+    summaryContainer.innerHTML = OrderSummary(getCartSubtotal());
 }
