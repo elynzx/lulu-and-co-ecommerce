@@ -1,15 +1,14 @@
 import {
     addToCart,
-    cart,
-    getCartTotal,
-    getCartCount,
+    getCart,
     setProductList,
+    removeFromCart,
+    updateCartQuantity,
 } from "./cartStore.js";
-import { renderHeader, renderCartPage } from "./ui.js";
+import { renderHeader, renderProducts, renderCartPage } from "./ui.js";
 
 const API_URL =
     "https://raw.githubusercontent.com/elynzx/lulu-co-api/refs/heads/main/products.json";
-const productsGrid = document.getElementById("products-grid");
 
 async function loadApp() {
     try {
@@ -19,18 +18,18 @@ async function loadApp() {
         }
 
         const productList = await response.json();
-
         setProductList(productList);
+
         renderProducts(productList);
-        renderHeader(cart);
-        renderCartPage(cart);
+        renderHeader(getCart());
+        renderCartPage(getCart());
     } catch (error) {
         console.error("Failed to fetch:", error.message);
 
         const productsGrid = document.getElementById("products-grid");
         if (productsGrid) {
             productsGrid.innerHTML = `
-            <p class="col-span-full text-center py-20 text-gray-500 italic">
+            <p class="col-span-full text-center py-20 text-gray-500">
                 We're sorry, we couldn't load the treats right now. Please try again later.
             </p>
           `;
@@ -38,57 +37,36 @@ async function loadApp() {
     }
 }
 
-function renderProducts(productList) {
-    if (!productsGrid || !productList) {
+/* Event Listeners */
+const productsGrid = document.getElementById("products-grid");
+productsGrid?.addEventListener("click", (e) => {
+    const addButton = e.target.closest(".add-btn");
+    if (!addButton) return;
+
+    const productId = Number(addButton.dataset.id);
+    addToCart(productId);
+    renderHeader(getCart());
+});
+
+document.addEventListener("click", (e) => {
+    const quantityBtn = e.target.closest(".js-qty-btn");
+    if (!quantityBtn) return;
+    if (quantityBtn) {
+        const productId = Number(quantityBtn.dataset.id);
+        const action = quantityBtn.dataset.action;
+        updateCartQuantity(productId, action);
+        renderCartPage(getCart());
+        renderHeader(getCart());
         return;
     }
 
-    productsGrid.innerHTML = productList
-        .map(
-            (product) => `
-    <div class="col-span-1 md:col-span-4 relative">
-      <div class="border border-gray-400/50 px-6 gap-4 py-10 md:p-10 w-full flex flex-col justify-between md:h-110 ">
-        <div>
-          <span class="text-[#09346d] text-xl md:text-2xl font-semibold font-[League_Spartan]">${product.name}</span>
-          <div class="text-gray-400 text-sm">
-          ${product.tags
-              .map(
-                  (tag, index) => `
-          <span>${tag}</span>
-          ${index < product.tags.length - 1 ? "<span> | </span>" : ""}
-          `,
-              )
-              .join("")}
-          </div>
-        </div>
-        <div class="flex w-full items-center justify-center">
-          <img class="max-h-60 object-contain transition-transform duration-500 hover:scale-105"
-            src="${product.image}">
-        </div>
-        <div class="text-[#C92B5D] text-3xl font-bold flex"> 
-  ${
-      product.variants.length > 1
-          ? `$${product.variants[0].price.toFixed(2)} - $${product.variants[product.variants.length - 1].price.toFixed(2)}`
-          : `$${product.variants[0].price.toFixed(2)}`
-  }
-        </div>
-      </div>
-      <button data-id="${product.id}"  
-        class="add-btn absolute w-18 h-auto cursor-pointer md:w-22 md:h-22 z-50 -top-4 md:-top-7 -right-7 rounded-full bg-white flex items-center justify-center transition-transform duration-300 hover:scale-110">
-        <i class="fa fa-plus-circle text-[#C92B5D] text-5xl md:text-6xl pointer-events-none"></i>
-      </button>
-    </div>
-  `,
-        )
-        .join("");
-}
-
-productsGrid?.addEventListener("click", (e) => {
-    const addButton = e.target.closest(".add-btn");
-    if (addButton) {
-        const id = Number(addButton.dataset.id);
-        addToCart(id);
-        renderHeader(cart);
+    const removeBtn = e.target.closest(".jsñ-remove-btn");
+    if (!removeBtn) return;
+    if (removeBtn) {
+        const productId = Number(removeBtn.dataset.id);
+        removeFromCart(productId);
+        renderCartPage(getCart());
+        renderHeader(getCart());
     }
 });
 
