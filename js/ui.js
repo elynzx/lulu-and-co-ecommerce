@@ -1,4 +1,10 @@
-import { getCartCount, getCartTotal, getCartSubtotal } from "./cartStore.js";
+import {
+    getCartCount,
+    getCartTotal,
+    getCartSubtotal,
+    updateCartQuantity,
+    cart,
+} from "./cartStore.js";
 
 const Logo = () => `<img class="w-24 md:w-auto" src="./assets/logo.svg" />`;
 
@@ -142,7 +148,13 @@ const CartTableRow = (item) => `
       <img class="w-16 h-16 object-contain border border-gray-200 rounded" src="${item.image}" alt="${item.name}">
       <span class="font-semibold text-[#09346d]">${item.name}</span>
     </td>
-    <td class="py-4 px-4 text-center font-medium">${item.quantity}</td>
+    <td class="py-4 px-4 text-center font-medium">
+      <div class="flex gap-4 items-center justify-center">
+      <button class="js-qty-btn bg-[#C92B5D] cursor-pointer text-white w-6 h-6 rounded-md flex items-center justify-center" data-id="${item.id}" data-action="decrease">-</button>
+      <span class="inline-block min-w-6 text-center">${item.quantity}</span>
+      <button class="js-qty-btn bg-[#C92B5D] cursor-pointer text-white w-6 h-6 rounded-md flex items-center justify-center" data-id="${item.id}" data-action="increase">+</button>
+      </div>
+    </td>
     <td class="py-4 px-4 text-center text-gray-600">$${item.price.toFixed(2)}</td>
     <td class="py-4 px-4 text-center font-bold text-[#09346d]">$${(item.price * item.quantity).toFixed(2)}</td>
     <td class="text-center">
@@ -209,8 +221,18 @@ export function renderCartPage(cartList = []) {
 
     tableBody.innerHTML = cartList.map((item) => CartTableRow(item)).join("");
 
+    tableBody.querySelectorAll(".js-qty-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            const id = btn.getAttribute("data-id");
+            const action = btn.getAttribute("data-action");
+            updateCartQuantity(id, action);
+            renderCartPage(cart);
+            renderHeader(cart);
+        });
+    });
+
     if (tableFooterTotal)
-        tableFooterTotal.innerText = `$${subtotal.toFixed(2)}`;
+        tableFooterTotal.innerText = `$${getCartSubtotal().toFixed(2)}`;
 
     summaryContainer.innerHTML = OrderSummary(getCartSubtotal());
 }
