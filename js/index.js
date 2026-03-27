@@ -50,7 +50,6 @@ productsGrid?.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
     const quantityBtn = e.target.closest(".js-qty-btn");
-    if (!quantityBtn) return;
     if (quantityBtn) {
         const productId = Number(quantityBtn.dataset.id);
         const action = quantityBtn.dataset.action;
@@ -60,8 +59,7 @@ document.addEventListener("click", (e) => {
         return;
     }
 
-    const removeBtn = e.target.closest(".jsñ-remove-btn");
-    if (!removeBtn) return;
+    const removeBtn = e.target.closest(".js-remove-btn");
     if (removeBtn) {
         const productId = Number(removeBtn.dataset.id);
         removeFromCart(productId);
