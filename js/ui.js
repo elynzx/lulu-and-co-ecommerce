@@ -33,7 +33,7 @@ const CartModalProduct = (item) => `
       <img class="w-25 h-auto object-contain p-3 shrink-0" src="${item.image}">
       <div class="flex flex-col justify-center h-32 min-w-0 gap-1">
         <span class="text-[#09346d] text-lg font-semibold font-[League_Spartan]">${item.name}</span>
-         ${item.size ? `<p class="text-gray-400 text-xs">${item.size}</p>` : ""}
+         ${item.size ? `<p class="text-gray-400 text-sm">Size: <span class="font-bold">${item.size}</span></p>` : ""}
         <div>
           <p class="text-gray-400 text-sm">Quantity: <span class="font-bold">${item.quantity}</span></p>
         </div>
