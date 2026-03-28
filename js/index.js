@@ -23,8 +23,15 @@ function matchesCategory(product) {
     return activeFilter === "All" || product.category === activeFilter;
 }
 
+function normalizeText(text) {
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "");
+}
+
 function matchesSearch(product) {
-    return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return normalizeText(product.name).includes(normalizeText(searchQuery));
 }
 
 function getFilteredProducts() {
