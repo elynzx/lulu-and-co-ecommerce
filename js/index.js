@@ -27,8 +27,8 @@ function matchesSearch(product) {
     return product.name.toLowerCase().includes(searchQuery.toLowerCase());
 }
 
-function getFilteredProducts(productList) {
-    return productList.filter(
+function getFilteredProducts() {
+    return loadedProducts.filter(
         (product) => matchesCategory(product) && matchesSearch(product),
     );
 }
@@ -38,18 +38,15 @@ function clearSearchInput() {
     if (searchInput) searchInput.value = "";
 }
 
-function setupFilterButtons(productList) {
+function setupFilterButtons() {
     document.querySelectorAll(".filter-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
             activeFilter = btn.dataset.filter;
-            const searchInput = document.getElementById("search-input");
             if (activeFilter === "All") {
                 searchQuery = "";
                 clearSearchInput();
-            } else {
-                searchQuery = searchInput ? searchInput.value : "";
             }
-            renderProducts(getFilteredProducts(productList));
+            renderProducts(getFilteredProducts());
             document
                 .querySelectorAll(".filter-btn")
                 .forEach((b) =>
@@ -57,14 +54,6 @@ function setupFilterButtons(productList) {
                 );
             btn.classList.add("bg-[#C92B5D]", "text-white");
         });
-    });
-}
-
-function setupSearchInput(productList) {
-    const searchInput = document.getElementById("search-input");
-    searchInput?.addEventListener("input", (e) => {
-        searchQuery = e.target.value;
-        renderProducts(getFilteredProducts(productList));
     });
 }
 
@@ -83,8 +72,7 @@ async function loadApp() {
         renderHeader(getCart());
         renderFooter();
         renderCartPage(getCart());
-        setupFilterButtons(productList);
-        setupSearchInput(productList);
+        setupFilterButtons();
     } catch (error) {
         console.error("Failed to fetch:", error.message);
 
@@ -136,6 +124,12 @@ document.addEventListener("click", (e) => {
         renderCartPage(getCart());
         renderHeader(getCart());
     }
+});
+
+document.addEventListener("input", (e) => {
+    if (e.target.id !== "search-input") return;
+    searchQuery = e.target.value;
+    renderProducts(getFilteredProducts());
 });
 
 loadApp();
