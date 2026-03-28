@@ -43,6 +43,18 @@ const CartModalProduct = (item) => `
     </div>
 `;
 
+const SearchInput = () => `
+  <div class="flex gap-2">
+    <div id="search-bar" class="hidden border-2 border-white/40 rounded-full px-4 py-1">
+      <input id="search-input" type="text" placeholder="Search for ..." class="text-sm outline-none">
+      </input>
+    </div>
+    <button id="search-btn">
+      <i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i>
+    </button>
+  </div>
+`;
+
 const CartModal = (cartList) => `
   <div id="cart-modal" class="absolute z-51 md:top-22 md:right-30 px-4 bg-white/95 max/h-160 w-100 shadow-xl hidden text-[#09346d]">
     <div id="cart-modal-content" class="flex flex-col gap-4 p-2 items-center max-h-125 overflow-y-auto mt-6">
@@ -73,8 +85,8 @@ export function renderHeader(cartList = []) {
         <div class="flex gap-12 items-center">
           ${NavLinks()}
           <button class="border-2 border-white rounded-full w-50 h-12 uppercase">Login / Signup</button>
-          <div class="flex gap-10 relative">
-            <a href="#"><i class="fa-solid fa-magnifying-glass transition duration-100 hover:scale-110"></i></a>
+          <div class="flex gap-10 relative items-center">
+            ${SearchInput()}
             <a href="#"><i class="fa-solid fa-heart transition duration-100 hover:scale-110"></i></a>
             ${CartButton(cartCount, false)}
           </div>
@@ -111,6 +123,9 @@ function setupEventListeners() {
     const desktopCartBtn = document.getElementById("cart-btn-desktop");
     const cartModal = document.getElementById("cart-modal");
 
+    const searchBtn = document.getElementById("search-btn");
+    const searchBarElement = document.getElementById("search-bar");
+
     menuBtn?.addEventListener("click", () =>
         mobileMenu.classList.remove("hidden"),
     );
@@ -121,6 +136,11 @@ function setupEventListeners() {
     desktopCartBtn?.addEventListener("click", (e) => {
         e.preventDefault();
         cartModal?.classList.toggle("hidden");
+    });
+
+    searchBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        searchBarElement?.classList.toggle("hidden");
     });
 
     document.addEventListener("click", (e) => {
@@ -141,7 +161,7 @@ export function renderProducts(productList) {
     if (!productsGrid || !productList) {
         return;
     }
-
+    console.log(productList);
     productsGrid.innerHTML = productList
         .map(
             (product) => `
