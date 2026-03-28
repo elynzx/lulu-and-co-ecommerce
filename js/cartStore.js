@@ -81,3 +81,8 @@ export function getCartSubtotal() {
 export function getCartTotal(subtotal, shipping) {
     return subtotal + shipping;
 }
+
+export function clearCart() {
+    cart.splice(0, cart.length);
+    saveCart();
+}
