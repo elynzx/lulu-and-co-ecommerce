@@ -17,8 +17,13 @@ const ProductDetail = (item) => `
       <img src="${item.image}" alt="${item.name}" class="w-full md:max-h-120 object-contain p-8">
     </div>
 
-    <div class="col-span-1 md:col-span-5 flex flex-col ml-4 md:ml-8 py-6">
+    <div class="col-span-1 md:col-span-5 flex flex-col ml-4 md:ml-8">
       <div class="flex flex-col gap-2">
+        <div class="text-gray-400 text-sm">${item.tags.map((tag, index) => `
+          <span>${tag}</span>
+          ${index < item.tags.length - 1 ? "<span> | </span>" : ""}
+          `,).join("")}
+        </div>
         <h1 class="text-2xl font-semibold font-[League_Spartan] text-[#09346d]">${item.name}</h1>
         <div class="text-[#C92B5D] text-sm flex gap-1">
           <i class="fa-solid fa-star"></i>
@@ -27,7 +32,7 @@ const ProductDetail = (item) => `
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
         </div>
-        <p class="mt-4 text-sm text-gray-600 leading-relaxed">${item.description}</p>
+        <p class="mt-4 text-sm text-gray-700 leading-relaxed">${item.description}</p>
 
         <div id="variant-container" class="flex flex-wrap gap-3 mt-2">
           ${
