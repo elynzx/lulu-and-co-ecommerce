@@ -1,6 +1,7 @@
 import { addToCart, getCart, setProductList } from "./cartStore.js";
 import { renderHeader, renderFooter } from "./ui.js";
 import { renderProductDetail } from "../components/ProductDetail/productDetail.js";
+import { renderRelatedProducts } from "../components/RelatedProducts/relatedProducts.js";
 
 const API_URL =
     "https://raw.githubusercontent.com/elynzx/lulu-co-api/refs/heads/main/products.json";
@@ -33,6 +34,13 @@ async function loadProductPage() {
         renderHeader(getCart());
         renderFooter();
         renderProductDetail(product);
+
+        const related = getRandomProducts(
+            productList.filter((p) => p.id !== product.id),
+            4,
+        );
+        renderRelatedProducts(related);
+        
         setupListeners(product);
     } catch (error) {
         console.error("Failed to load product:", error.message);
@@ -87,6 +95,12 @@ function setupListeners(product) {
                 btn.classList.remove("bg-[#09346d]");
             }, 1500);
         });
+}
+
+function getRandomProducts(productList, numberOfProducts) {
+    return [...productList]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, numberOfProducts);
 }
 
 loadProductPage();
