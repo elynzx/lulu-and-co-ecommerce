@@ -6,7 +6,7 @@ const NavLinks = () => `
   <nav>
     <ul class="flex flex-col md:flex-row gap-8 md:gap-10 items-center">
       <li><a class="uppercase hover:underline underline-offset-12" href="index.html">Home</a></li>
-      <li><a class="uppercase hover:underline underline-offset-12" href="#">Shop</a></li>
+      <li class="scroll-smooth"><a class="uppercase hover:underline underline-offset-12" href="#products-section">Shop</a></li>
       <li><a class="uppercase hover:underline underline-offset-12" href="#">Blog</a></li>
       <li><a class="uppercase hover:underline underline-offset-12" href="#">Contact</a></li>
     </ul>
@@ -255,7 +255,7 @@ const OrderSummary = (subtotal) => {
           <span class="text-xl">$${total.toFixed(2)}</span>
         </div>
       </div>
-      <button class="mt-6 py-2 w-full md:h-14 font-bold rounded-full bg-[#C92B5D] cursor-pointer text-white hover:bg-[#af234f] transition-colors uppercase">
+      <button id="checkout-btn" class="mt-6 py-2 w-full md:h-14 font-bold rounded-full bg-[#C92B5D] cursor-pointer text-white hover:bg-[#af234f] transition-colors uppercase">
         Proceed to checkout
       </button>
     </div>
@@ -282,6 +282,54 @@ export function renderCartPage(cartList = []) {
 
     tableBody.innerHTML = cartList.map((item) => CartTableRow(item)).join("");
     summaryContainer.innerHTML = OrderSummary(getCartSubtotal());
+
+    const checkoutBtn = document.getElementById("checkout-btn");
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            showCheckoutModal();
+        });
+    }
+}
+
+export function showCheckoutModal() {
+    let overlay = document.getElementById("checkout-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.id = "checkout-overlay";
+        overlay.className =
+            "fixed inset-0 z-70 flex items-center justify-center bg-black/40 backdrop-blur-sm";
+        document.body.appendChild(overlay);
+    }
+    overlay.innerHTML = `
+      <div id="checkout-modal" class="flex flex-col items-center justify-center w-120 py-8 gap-4 text-center bg-white rounded-2xl shadow-2xl ">
+        <div class="w-20 h-20 rounded-full bg-[#FF6D91]/10 flex items-center justify-center animate-bounce-once">
+          <i class="fa-solid fa-heart text-4xl text-[#FF6D91]"></i>
+        </div>
+        <h2 class="font-[League_Spartan] text-2xl font-semibold text-[#09346d]">Order Confirmed!</h2>
+        <p class="text-gray-500 text-sm max-w-xs">
+          Thank you for your order!
+        </p>
+        <button id="checkout-close-success"
+          class="mt-4 bg-[#FF6D91] hover:bg-[#e05578] text-white font-bold uppercase rounded-full px-10 py-3 transition-colors cursor-pointer">
+          <a href="index.html#products-section">Back to Shop</a>
+        </button>
+      </div>
+    `;
+    overlay.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    document
+        .getElementById("checkout-close-success")
+        ?.addEventListener("click", () => {
+            overlay.classList.add("hidden");
+            document.body.style.overflow = "";
+        });
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+            overlay.classList.add("hidden");
+            document.body.style.overflow = "";
+        }
+    });
 }
 
 /* Footer */
