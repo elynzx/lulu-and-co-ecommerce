@@ -210,7 +210,7 @@ export function renderProducts(productList) {
 /* Cart page */
 
 const CartTableRow = (item) => `
-  <tr class="border-b border-gray-100">
+  <tr class="hidden md:table-row border-b border-gray-100">
     <td class="py-4 px-4 flex items-center gap-3">
       <img class="w-16 h-16 object-contain border border-gray-200 rounded" src="${item.image}" alt="${item.name}">
       <div class="flex flex-col gap-1">
@@ -231,6 +231,35 @@ const CartTableRow = (item) => `
       <button class="js-remove-btn text-[#C92B5D] hover:scale-110 transition-transform cursor-pointer" data-id="${item.id}">
         <i class="fa-solid fa-trash"></i>
       </button>
+    </td>
+  </tr>
+
+   <!-- Mobile table-->
+  <tr class="md:hidden border-b border-gray-100">
+    <td colspan="5" class="py-6 px-2">
+      <div class="flex gap-6">
+        <img class="w-20 h-auto object-contain border border-gray-200 rounded shrink-0 p-2" src="${item.image}" alt="${item.name}">
+        <div class="flex flex-col gap-3 flex-1 min-w-0">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <p class="font-semibold text-[#09346d] text-sm leading-tight">${item.name}</p>
+              ${item.size ? `<p class="text-gray-400 text-xs">Size: ${item.size}</p>` : ""}
+            </div>
+            <button class="js-remove-btn text-[#C92B5D] shrink-0" data-id="${item.id}">
+              <i class="fa-solid fa-trash text-sm"></i>
+            </button>
+          </div>
+          <p class="text-gray-400">Unit price: <span class="font-semibold text-[#09346d]">$${item.price.toFixed(2)}</span></p>
+          <div class="flex items-center justify-between">
+            <div class="flex gap-3 items-center">
+              <button class="js-qty-btn bg-[#C92B5D] text-white w-6 h-6 rounded-md flex items-center justify-center cursor-pointer" data-id="${item.id}" data-action="decrease">-</button>
+              <span class="min-w-4 text-center font-bold text-sm">${item.quantity}</span>
+              <button class="js-qty-btn bg-[#C92B5D] text-white w-6 h-6 rounded-md flex items-center justify-center cursor-pointer" data-id="${item.id}" data-action="increase">+</button>
+            </div>
+            <span class="font-bold text-[#09346d] text-lg">$${(item.price * item.quantity).toFixed(2)}</span>
+          </div>
+        </div>
+      </div>
     </td>
   </tr>
 `;
