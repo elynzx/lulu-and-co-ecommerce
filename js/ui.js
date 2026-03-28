@@ -233,7 +233,7 @@ const OrderSummary = (subtotal) => {
     const productCount = getCartCount();
 
     return `
-    <div class="w-full max-h-full bg-white rounded-xl shadow-lg border border-gray-400/20 p-6 flex flex-col gap-4 md:top-32">
+    <div class="w-full max-h-full bg-white shadow-lg border border-gray-400/20 px-8 py-12 flex flex-col gap-4">
       <h4 class="text-lg font-bold text-[#C92B5D] mb-2 text-center underline underline-offset-8">Order Summary</h4>
       <div class="flex flex-col gap-3 mt-4 border-b border-gray-100">
         <div class="flex justify-between text-sm text-gray-600 space-y-3">
@@ -302,16 +302,16 @@ export function showCheckoutModal() {
         document.body.appendChild(overlay);
     }
     overlay.innerHTML = `
-      <div id="checkout-modal" class="flex flex-col items-center justify-center w-120 py-8 gap-4 text-center bg-white rounded-2xl shadow-2xl ">
+      <div id="checkout-modal" class="flex flex-col items-center justify-center w-120 py-12 gap-4 text-center bg-white shadow-2xl ">
         <div class="w-20 h-20 rounded-full bg-[#FF6D91]/10 flex items-center justify-center animate-bounce-once">
-          <i class="fa-solid fa-heart text-4xl text-[#FF6D91]"></i>
+          <i class="fa-solid fa-heart text-4xl text-[#C92B5D]"></i>
         </div>
         <h2 class="font-[League_Spartan] text-2xl font-semibold text-[#09346d]">Order Confirmed!</h2>
         <p class="text-gray-500 text-sm max-w-xs">
           Thank you for your order!
         </p>
         <button id="checkout-close-success"
-          class="mt-4 bg-[#FF6D91] hover:bg-[#e05578] text-white font-bold uppercase rounded-full px-10 py-3 transition-colors cursor-pointer">
+          class="mt-4 bg-[#C92B5D] hover:bg-[#af234f] text-white font-bold uppercase rounded-full px-10 py-3 transition-colors cursor-pointer">
           <a href="index.html#products-section">Back to Shop</a>
         </button>
       </div>
