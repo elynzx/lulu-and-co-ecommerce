@@ -278,19 +278,94 @@ export function renderCartPage(cartList = []) {
     if (!tableBody || !summaryContainer) return;
 
     if (cartList.length === 0) {
+        document
+            .getElementById("mobile-summary-container")
+            ?.classList.add("hidden");
         cartSection.innerHTML = `
-      <div class="flex flex-col items-center py-20 gap-6">
-        <i class="fa-solid fa-cart-shopping text-6xl text-gray-200"></i>
-        <p class="text-xl text-gray-500 italic">Your shopping cart is empty</p>
-        <a href="index.html" class="bg-[#FF6D91] text-white px-8 py-3 rounded-full font-bold uppercase">Go back to shop</a>
-      </div>
+          <div class="flex flex-col items-center py-20 gap-6">
+            <i class="fa-solid fa-cart-shopping text-6xl text-gray-200"></i>
+            <p class="text-xl text-gray-500 italic">Your shopping cart is empty</p>
+            <a href="index.html" class="bg-[#FF6D91] text-white px-8 py-3 rounded-full font-bold uppercase">Go back to shop</a>
+          </div>
     `;
         return;
     }
 
+    const subtotal = getCartSubtotal();
     tableBody.innerHTML = cartList.map((item) => CartTableRow(item)).join("");
     summaryContainer.innerHTML = OrderSummary(getCartSubtotal());
+    setupCheckoutBtn();
+    renderMobileSummary(subtotal);
+}
 
+function renderMobileSummary(subtotal) {
+    const mobileSummaryModal = document.getElementById(
+        "mobile-summary-container",
+    );
+    if (!mobileSummaryModal) return;
+
+    const shipping = 5;
+    const total = subtotal + shipping;
+    const count = getCartCount();
+
+    mobileSummaryModal.classList.remove("hidden");
+    mobileSummaryModal.innerHTML = `
+        <div id="summary-toggle" class="cursor-pointer px-6 pt-8 pb-4 flex items-center justify-between relative">
+            <div class="flex items-center gap-3">
+                <span class="text-[#09346d] font-bold text-base">Order Summary</span>
+                <span class="text-xs bg-gray-100 text-gray-600 font-semibold px-2 py-0.5 rounded-full">
+                    ${count} item${count !== 1 ? "s" : ""}
+                </span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-[#C92B5D] font-bold text-lg">$${total.toFixed(2)}</span>
+            </div>
+            <div class="absolute -top-4 right-40 bg-white w-10 h-10 rounded-full flex items-center justify-center">
+              <i id="sheet-chevron" class="text-xl fa-solid fa-chevron-up text-gray-400 transition-transform duration-300"></i>
+            </div>
+        </div>
+
+        <div id="summary-body" class="hidden px-6 pb-6 flex flex-col gap-4">
+            <div class="flex flex-col gap-2 text-sm border-t border-gray-100 pt-4">
+                <div class="flex justify-between text-gray-500">
+                    <span>Subtotal</span>
+                    <span class="font-semibold text-[#09346d]">$${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="flex justify-between text-gray-500">
+                    <span>Shipping</span>
+                    <span class="font-semibold text-[#09346d]">$${shipping.toFixed(2)}</span>
+                </div>
+                <div class="flex justify-between font-bold text-[#09346d] border-t border-gray-100 pt-2 mt-1 text-base">
+                    <span>Total</span>
+                    <span>$${total.toFixed(2)}</span>
+                </div>
+            </div>
+            <button id="checkout-btn-mobile"
+                class="w-full bg-[#C92B5D] hover:bg-[#af234f] text-white font-bold uppercase rounded-full py-4 transition-colors cursor-pointer">
+                Proceed to Checkout
+            </button>
+        </div>
+    `;
+
+    document.getElementById("summary-toggle")?.addEventListener("click", () => {
+        const body = document.getElementById("summary-body");
+        const toggleChevron = document.getElementById("sheet-chevron");
+        const isBodyHidden = body.classList.contains("hidden");
+        body.classList.toggle("hidden");
+        toggleChevron.style.transform = isBodyHidden
+            ? "rotate(180deg)"
+            : "rotate(0deg)";
+    });
+
+    document
+        .getElementById("checkout-btn-mobile")
+        ?.addEventListener("click", (e) => {
+            e.preventDefault();
+            showCheckoutModal();
+        });
+}
+
+function setupCheckoutBtn() {
     const checkoutBtn = document.getElementById("checkout-btn");
     if (checkoutBtn) {
         checkoutBtn.addEventListener("click", (e) => {
