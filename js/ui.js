@@ -1,4 +1,9 @@
-import { getCartCount, getCartTotal, getCartSubtotal } from "./cartStore.js";
+import {
+    getCartCount,
+    getCartTotal,
+    getCartSubtotal,
+    clearCart,
+} from "./cartStore.js";
 
 const Logo = () => `<img class="w-24 md:w-auto" src="./assets/logo.svg" />`;
 
@@ -433,6 +438,7 @@ export function showCheckoutModal() {
     document
         .getElementById("checkout-close-success")
         ?.addEventListener("click", () => {
+            clearCart();
             overlay.classList.add("hidden");
             document.body.style.overflow = "";
         });
