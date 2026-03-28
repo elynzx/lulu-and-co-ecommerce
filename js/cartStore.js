@@ -11,28 +11,33 @@ export function getCart() {
 
 const saveCart = () => localStorage.setItem("cartUser", JSON.stringify(cart));
 
-const createCartProduct = (product) => ({
+const createCartProduct = (product, variant) => ({
     id: product.id,
     name: product.name,
-    price: product.variants[0].price,
+    size: variant.size,
+    price: variant.price,
     image: product.image,
     quantity: 1,
 });
 
-export function addToCart(productId) {
+export function addToCart(productId, variant = null) {
     const selectedProduct = productList.find(
         (product) => String(product.id) === String(productId),
     );
     if (!selectedProduct) return;
 
-    const existingProduct = cart.find(
-        (product) => String(product.id) === String(productId),
-    );
+    const productVariant = variant ?? selectedProduct.variants[0];
+    const cartItemId = `${productId}-${productVariant.sku}`;
+
+    const existingProduct = cart.find((product) => product.id === cartItemId);
 
     if (existingProduct) {
         existingProduct.quantity += 1;
     } else {
-        cart.push(createCartProduct(selectedProduct));
+        cart.push({
+            ...createCartProduct(selectedProduct, productVariant),
+            id: cartItemId,
+        });
     }
     saveCart();
 }
