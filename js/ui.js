@@ -167,7 +167,10 @@ export function renderProducts(productList) {
             (product) => `
     <div class="col-span-1 md:col-span-4 relative">
       <div class="border border-gray-400/50 px-6 gap-4 py-10 md:p-10 w-full flex flex-col justify-between md:h-110 ">
-        <div>
+        <a href="./product.html?id=${product.id}&urlName=${product.urlName}"
+       class="flex flex-col gap-4 flex-1">
+       
+      <div>
           <span class="text-[#09346d] text-xl md:text-2xl font-semibold font-[League_Spartan]">${product.name}</span>
           <div class="text-gray-400 text-sm">
           ${product.tags
@@ -184,6 +187,7 @@ export function renderProducts(productList) {
           <img class="max-h-60 object-contain transition-transform duration-500 hover:scale-105"
             src="${product.image}">
         </div>
+        </a>
         <div class="text-[#C92B5D] text-3xl font-bold flex"> 
   ${
       product.variants.length > 1
