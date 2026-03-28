@@ -15,6 +15,23 @@ import {
 const API_URL =
     "https://raw.githubusercontent.com/elynzx/lulu-co-api/refs/heads/main/products.json";
 
+let activeFilter = "All";
+let searchQuery = "";
+
+function matchesCategory(product) {
+    return activeFilter === "All" || product.category === activeFilter;
+}
+
+function matchesSearch(product) {
+    return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+}
+
+function getFilteredProducts(productList) {
+    return productList.filter(
+        (product) => matchesCategory(product) && matchesSearch(product),
+    );
+}
+
 async function loadApp() {
     try {
         const response = await fetch(API_URL);
@@ -29,6 +46,23 @@ async function loadApp() {
         renderHeader(getCart());
         renderFooter();
         renderCartPage(getCart());
+
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                activeFilter = btn.dataset.filter;
+                renderProducts(getFilteredProducts(productList));
+                document
+                    .querySelectorAll(".filter-btn")
+                    .forEach((b) => b.classList.remove("active-filter"));
+                btn.classList.add("active-filter");
+            });
+        });
+
+        const searchInput = document.getElementById("search-input");
+        searchInput?.addEventListener("input", (e) => {
+            searchQuery = e.target.value;
+            renderProducts(getFilteredProducts(productList));
+        });
     } catch (error) {
         console.error("Failed to fetch:", error.message);
 
