@@ -419,7 +419,7 @@ export function showCheckoutModal() {
         document.body.appendChild(overlay);
     }
     overlay.innerHTML = `
-      <div id="checkout-modal" class="flex flex-col items-center justify-center w-120 py-12 gap-4 text-center bg-white shadow-2xl ">
+      <div id="checkout-modal" class="flex flex-col items-center justify-center w-80 md:w-120 py-12 gap-4 text-center bg-white shadow-2xl ">
         <div class="w-20 h-20 rounded-full bg-[#FF6D91]/10 flex items-center justify-center animate-bounce-once">
           <i class="fa-solid fa-heart text-4xl text-[#C92B5D]"></i>
         </div>

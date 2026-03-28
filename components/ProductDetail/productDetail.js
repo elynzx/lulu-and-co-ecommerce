@@ -19,10 +19,14 @@ const ProductDetail = (item) => `
 
     <div class="col-span-1 md:col-span-5 flex flex-col ml-4 md:ml-8">
       <div class="flex flex-col gap-2">
-        <div class="text-gray-400 text-sm">${item.tags.map((tag, index) => `
+        <div class="text-gray-400 text-sm">${item.tags
+            .map(
+                (tag, index) => `
           <span>${tag}</span>
           ${index < item.tags.length - 1 ? "<span> | </span>" : ""}
-          `,).join("")}
+          `,
+            )
+            .join("")}
         </div>
         <h1 class="text-2xl font-semibold font-[League_Spartan] text-[#09346d]">${item.name}</h1>
         <div class="text-[#C92B5D] text-sm flex gap-1">
@@ -53,13 +57,13 @@ const ProductDetail = (item) => `
           }
         </div>
 
-        <div class="mt-8">
-          <span id="product-price" class="text-3xl font-semibold text-[#C92B5D]">
+        <div class="mt-8 flex md:flex-col items-center justify-center md:items-start">
+          <span id="product-price" class="text-4xl md:text-3xl font-semibold text-[#C92B5D]">
             $${item.variants[0].price.toFixed(2)}
           </span>
         </div>
 
-        <div class="flex items-center justify-between gap-15 mt-6">
+        <div class="flex md:flex-row flex-col items-center justify-between gap-6 md:gap-15 mt-6">
           <div class="flex gap-6 items-center">
             <button id="qty-decrease"
               class="w-8 h-8 bg-[#C92B5D] cursor-pointer text-white rounded-md flex items-center justify-center hover:bg-[#ad214e] transition-colors">-</button>
