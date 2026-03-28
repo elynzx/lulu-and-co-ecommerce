@@ -51,8 +51,10 @@ function setupFilterButtons(productList) {
             renderProducts(getFilteredProducts(productList));
             document
                 .querySelectorAll(".filter-btn")
-                .forEach((b) => b.classList.remove("active-filter"));
-            btn.classList.add("active-filter");
+                .forEach((b) =>
+                    b.classList.remove("bg-[#C92B5D]", "text-white"),
+                );
+            btn.classList.add("bg-[#C92B5D]", "text-white");
         });
     });
 }
