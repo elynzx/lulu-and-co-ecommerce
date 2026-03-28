@@ -35,14 +35,15 @@
       <section id="cart-section" class="py-22">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
           <!-- Cart Table -->
-          <div class="col-span-1 md:col-span-8 flex flex-col items-center justify-center">
+          <div class="col-span-1 md:col-span-8 flex flex-col">
             <div class="flex flex-col gap-3 md:gap-7 justify-center items-center">
               <h3
                 class="text-[#C92B5D] font-[League_Spartan] font-semibold text-2xl md:text-5xl text-center md:text-left">
                 Shopping Cart</h3>
               <p class="text-center text-[16px] md:text-md md:w-xl">Review your order below before checkout.</p>
             </div>
-            <div class="w-full mt-10">
+
+            <div class="w-full mt-10 overflow-auto">
               <table class="min-w-full bg-white text-sm">
                 <thead>
                   <tr class="border-b bortder-gray-300 text-[#09346d]">
@@ -57,11 +58,13 @@
                 </tbody>
               </table>
             </div>
+
+            <div class="h-32 md:hidden"></div>
           </div>
 
           <!-- Cart summary-->
           <div id="order-summary-container"
-            class="col-span-1 md:col-span-4 flex flex-col items-center md:items-end md:h-full px-2 md:px-10">
+            class="hidden md:flex col-span-1 md:col-span-4 flex-col items-center md:items-end md:h-full px-2 md:px-10">
           </div>
 
         </div>
@@ -74,6 +77,12 @@
     <div id="main-footer-container">
     </div>
   </footer>
+
+  <!-- Mobile summary modal -->
+  <div id="mobile-summary-container"
+    class="hidden md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.12)] transition-transform duration-300">
+  </div>
+
 </body>
 <script type="module" src="./js/index.js"></script>
 
