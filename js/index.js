@@ -17,6 +17,7 @@ const API_URL =
 
 let activeFilter = "All";
 let searchQuery = "";
+let loadedProducts = [];
 
 function matchesCategory(product) {
     return activeFilter === "All" || product.category === activeFilter;
@@ -75,6 +76,7 @@ async function loadApp() {
         }
 
         const productList = await response.json();
+        loadedProducts = productList;
         setProductList(productList);
 
         renderProducts(productList);
@@ -104,6 +106,14 @@ productsGrid?.addEventListener("click", (e) => {
     if (!addButton) return;
 
     const productId = Number(addButton.dataset.id);
+    const product = loadedProducts.find(
+        (p) => String(p.id) === String(productId),
+    );
+    if (!product) return;
+    if (product.variants.length > 1) {
+        window.location.href = `./product.html?id=${product.id}`;
+        return;
+    }
     addToCart(productId);
     renderHeader(getCart());
 });
@@ -111,7 +121,7 @@ productsGrid?.addEventListener("click", (e) => {
 document.addEventListener("click", (e) => {
     const quantityBtn = e.target.closest(".js-qty-btn");
     if (quantityBtn) {
-        const productId = Number(quantityBtn.dataset.id);
+        const productId = quantityBtn.dataset.id;
         const action = quantityBtn.dataset.action;
         updateCartQuantity(productId, action);
         renderCartPage(getCart());
@@ -121,7 +131,7 @@ document.addEventListener("click", (e) => {
 
     const removeBtn = e.target.closest(".js-remove-btn");
     if (removeBtn) {
-        const productId = Number(removeBtn.dataset.id);
+        const productId = removeBtn.dataset.id;
         removeFromCart(productId);
         renderCartPage(getCart());
         renderHeader(getCart());
