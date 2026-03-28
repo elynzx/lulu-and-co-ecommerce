@@ -213,8 +213,10 @@ const CartTableRow = (item) => `
   <tr class="border-b border-gray-100">
     <td class="py-4 px-4 flex items-center gap-3">
       <img class="w-16 h-16 object-contain border border-gray-200 rounded" src="${item.image}" alt="${item.name}">
+      <div class="flex flex-col gap-1">
       <span class="font-semibold text-[#09346d]">${item.name}</span>
-      ${item.size ? `<span class="text-xs text-gray-400">${item.size}</span>` : ""}
+      ${item.size ? `<span class="text-xs text-gray-400">Size: ${item.size}</span>` : ""}
+      </div>
     </td>
     <td class="py-4 px-4 text-center font-medium">
       <div class="flex gap-4 items-center justify-center">
