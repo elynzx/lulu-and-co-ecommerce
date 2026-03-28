@@ -37,12 +37,10 @@ const CartModalProduct = (item) => `
     <div class="border border-gray-400/50 w-full px-4 h-32 flex gap-2 items-center">
       <img class="w-25 h-auto object-contain p-3 shrink-0" src="${item.image}">
       <div class="flex flex-col justify-center h-32 min-w-0 gap-1">
-        <span class="text-[#09346d] text-lg font-semibold font-[League_Spartan]">${item.name}</span>
-         ${item.size ? `<p class="text-gray-400 text-sm">Size: <span class="font-bold">${item.size}</span></p>` : ""}
+        <span class="text-[#09346d] text-[17px] font-semibold font-[League_Spartan]">${item.name}</span>
         <div>
+        ${item.size ? `<p class="text-gray-400 text-sm">Size: <span class="font-bold">${item.size}</span></p>` : ""}
           <p class="text-gray-400 text-sm">Quantity: <span class="font-bold">${item.quantity}</span></p>
-        </div>
-        <div>
           <p class="text-gray-400 text-sm">Total: <span class="font-bold">$ ${(item.price * item.quantity).toFixed(2)}</span></p>
         </div>
       </div>
