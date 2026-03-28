@@ -33,6 +33,7 @@ const CartModalProduct = (item) => `
       <img class="w-25 h-auto object-contain p-3 shrink-0" src="${item.image}">
       <div class="flex flex-col justify-center h-32 min-w-0 gap-1">
         <span class="text-[#09346d] text-lg font-semibold font-[League_Spartan]">${item.name}</span>
+         ${item.size ? `<p class="text-gray-400 text-xs">${item.size}</p>` : ""}
         <div>
           <p class="text-gray-400 text-sm">Quantity: <span class="font-bold">${item.quantity}</span></p>
         </div>
@@ -213,6 +214,7 @@ const CartTableRow = (item) => `
     <td class="py-4 px-4 flex items-center gap-3">
       <img class="w-16 h-16 object-contain border border-gray-200 rounded" src="${item.image}" alt="${item.name}">
       <span class="font-semibold text-[#09346d]">${item.name}</span>
+      ${item.size ? `<span class="text-xs text-gray-400">${item.size}</span>` : ""}
     </td>
     <td class="py-4 px-4 text-center font-medium">
       <div class="flex gap-4 items-center justify-center">
